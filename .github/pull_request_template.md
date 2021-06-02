@@ -10,4 +10,4 @@
 
 Jira Link |
 ------ |
-[EL-<issue_id>](https://wavyglobal.atlassian.net/browse/EL-<issue_id>) |
+[EL-<issue_id>](https://republicadocafecomleite.atlassian.net/browse/EL-<issue_id>) |
