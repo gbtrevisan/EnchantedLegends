@@ -1,9 +1,9 @@
-package com.unicamp.mc322.enchantedlegends.card;
+package com.unicamp.mc322.enchantedlegends.game.card;
 
-import com.unicamp.mc322.enchantedlegends.Event;
-import com.unicamp.mc322.enchantedlegends.effect.Effect;
-import com.unicamp.mc322.enchantedlegends.GameState;
-import com.unicamp.mc322.enchantedlegends.Mana;
+import com.unicamp.mc322.enchantedlegends.game.event.Event;
+import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 
 import java.util.Arrays;
 import java.util.List;
