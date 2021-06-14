@@ -3,7 +3,8 @@ package com.unicamp.mc322.enchantedlegends.card;
 import com.unicamp.mc322.enchantedlegends.Event;
 import com.unicamp.mc322.enchantedlegends.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.GameState;
-import com.unicamp.mc322.enchantedlegends.Mana;
+import com.unicamp.mc322.enchantedlegends.mana.InsufficientManaException;
+import com.unicamp.mc322.enchantedlegends.mana.Mana;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +31,6 @@ public abstract class Card {
         effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(effect -> effect.apply(gameState));
     }
 
-    public abstract boolean activate(Mana mana, GameState gameState);
+    public abstract void activate(Mana mana, GameState gameState) throws InsufficientManaException;
 
 }
