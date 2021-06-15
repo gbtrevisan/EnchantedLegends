@@ -6,4 +6,14 @@ public class CardException extends RuntimeException {
         super(s);
     }
 
+    public CardException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public CardException(Throwable cause) {
+        super(cause);
+    }
+
+    public CardException() {
+    }
 }
