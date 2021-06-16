@@ -2,13 +2,14 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.exception.FollowerCreationException;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
 import java.util.StringJoiner;
 
 public class Follower extends Card {
-    private int damage, health;
+    protected int damage, health;
 
     public Follower(String name, int cost, int damage, int health, Effect... effects) {
         super(name, cost, effects);
@@ -58,6 +59,10 @@ public class Follower extends Card {
     public void increaseHealth(int amount) {
         checkAmount(amount);
         this.health += amount;
+    }
+
+    public boolean isDead() {
+        return this.health == 0;
     }
 
     private void checkAmount(int amount) {

@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.card.unit;
+package com.unicamp.mc322.enchantedlegends.game.exception;
 
 public class FollowerCreationException extends IllegalArgumentException {
     public FollowerCreationException() {
