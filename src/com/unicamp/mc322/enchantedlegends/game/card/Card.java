@@ -28,7 +28,7 @@ public abstract class Card {
     }
 
     protected void applyEffects(Event event) {
-        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(effect -> effect.apply());
+        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(Effect::apply);
     }
 
     public abstract void activate(Mana mana) throws InsufficientManaException;
