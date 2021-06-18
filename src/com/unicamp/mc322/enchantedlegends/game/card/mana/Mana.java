@@ -26,7 +26,7 @@ public class Mana {
 
     public void use(int amount) throws InsufficientManaException {
         if (mana < amount) {
-            throw new InsufficientManaException("Not enough mana for this amount:" + amount);
+            throw new InsufficientManaException("Not enough mana for this amount: " + amount);
         }
 
         mana -= amount;
