@@ -31,5 +31,5 @@ public abstract class Card {
         effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(effect -> effect.apply());
     }
 
-    public abstract void activate(Mana mana, GameState gameState) throws InsufficientManaException;
+    public abstract void activate(Mana mana) throws InsufficientManaException;
 }

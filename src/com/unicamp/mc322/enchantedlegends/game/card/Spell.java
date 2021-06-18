@@ -12,7 +12,7 @@ public class Spell extends Card {
     }
 
     @Override
-    public void activate(Mana mana, GameState gameState) throws InsufficientManaException {
+    public void activate(Mana mana) throws InsufficientManaException {
         mana.use(cost);
         applyEffects(Event.ACTIVATION);
     }
