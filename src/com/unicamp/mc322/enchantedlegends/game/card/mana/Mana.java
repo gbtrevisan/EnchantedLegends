@@ -20,7 +20,7 @@ public class Mana {
             throw new IllegalManaRestoreException("Value to restore mana should be a positive number!");
         }
 
-        extra = mana % MAX_RELOCATED_MANA;
+        extra = Math.min(mana, MAX_RELOCATED_MANA);
         mana = Math.min(value, MAX_MANA);
     }
 
