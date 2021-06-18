@@ -11,6 +11,7 @@ public class GameState {
         if (instance == null) {
             instance = new GameState();
         }
+        
         return instance;
     }
 }
