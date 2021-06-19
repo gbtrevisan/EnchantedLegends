@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.exception;
+package com.unicamp.mc322.enchantedlegends.game.card;
 
 public class CardException extends RuntimeException {
 

@@ -1,12 +1,12 @@
-package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types;
+package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
-import com.unicamp.mc322.enchantedlegends.game.exception.ChampionCreationException;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.ChampionCreationException;
 
-public class LifeChampion extends ChampionUpgrade {
+public class LifeUpgrade extends ChampionUpgrade {
     private final int extraHealthPoints;
 
-    public LifeChampion(int extraHealthPoints) {
+    public LifeUpgrade(int extraHealthPoints) {
         this.extraHealthPoints = extraHealthPoints;
 
         if (this.extraHealthPoints <= 0) {

@@ -1,14 +1,13 @@
-package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types;
+package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 
-
-public class MagicChampion extends ChampionUpgrade {
+public class MagicUpgrade extends ChampionUpgrade {
     private final Effect extraEffect;
     //private final Tracos extraTracos;
 
-    public MagicChampion(Effect extraEffect) {
+    public MagicUpgrade(Effect extraEffect) {
         //if (extraEffect == null &&traco == null { exception}
 
         this.extraEffect = extraEffect;

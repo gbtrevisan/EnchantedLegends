@@ -1,12 +1,12 @@
-package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types;
+package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
-import com.unicamp.mc322.enchantedlegends.game.exception.ChampionCreationException;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.ChampionCreationException;
 
-public class StrengthChampion extends ChampionUpgrade {
+public class StrengthUpgrade extends ChampionUpgrade {
     private final int extraDamagePoints;
 
-    public StrengthChampion(int extraDamagePoints) {
+    public StrengthUpgrade(int extraDamagePoints) {
         this.extraDamagePoints = extraDamagePoints;
 
         if (this.extraDamagePoints <= 0) {

@@ -2,7 +2,6 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
-import com.unicamp.mc322.enchantedlegends.game.exception.FollowerCreationException;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
@@ -63,6 +62,10 @@ public class Follower extends Card {
 
     public boolean isDead() {
         return this.health == 0;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     private void checkAmount(int amount) {

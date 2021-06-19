@@ -1,4 +1,6 @@
-package com.unicamp.mc322.enchantedlegends.game.exception;
+package com.unicamp.mc322.enchantedlegends.game.card.unit.champion;
+
+import com.unicamp.mc322.enchantedlegends.game.card.unit.FollowerCreationException;
 
 public class ChampionCreationException extends FollowerCreationException {
     public ChampionCreationException() {

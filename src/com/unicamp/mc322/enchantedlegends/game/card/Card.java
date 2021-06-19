@@ -1,7 +1,6 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
-import com.unicamp.mc322.enchantedlegends.game.exception.CardException;
-import com.unicamp.mc322.enchantedlegends.game.exception.ManaException;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.ManaException;
 import com.unicamp.mc322.enchantedlegends.game.event.Event;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;

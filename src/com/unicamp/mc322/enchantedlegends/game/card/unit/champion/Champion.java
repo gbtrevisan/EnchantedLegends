@@ -1,73 +1,70 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
-import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.levelup.LevelUp;
-import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.levelup.LevelUpType;
-import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types.ChampionUpgrade;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.ChampionUpgrade;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
-import com.unicamp.mc322.enchantedlegends.game.exception.ChampionCreationException;
 
 import java.util.List;
+import java.util.StringJoiner;
 
-public class Champion extends Follower {
-    private final LevelUp levelUp;
+public abstract class Champion extends Follower {
+    private int levelUpPoints;
+    private boolean alreadyPassedLevel;
     private final List<ChampionUpgrade> championUpgrades;
 
-    public Champion(String name, int cost, int damage, int health, LevelUp levelUp, List<ChampionUpgrade> championUpgrades, Effect... effects) {
+    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
         super(name, cost, damage, health, effects);
-        this.levelUp = levelUp;
+
+        if (levelUpPoints <= 0) {
+            throw new ChampionCreationException("Points to pass a level must be greater than zero!");
+        }
+
+        this.levelUpPoints = levelUpPoints;
 
         if (championUpgrades.isEmpty()) {
             throw new ChampionCreationException("There must be at least one upgrade!");
         }
 
         this.championUpgrades = championUpgrades;
+        this.alreadyPassedLevel = false;
     }
 
     public void addEffect(Effect effectAdd) {
         this.effects.add(effectAdd);
     }
 
-    @Override
-    public void combat(Follower enemy) {
-        super.combat(enemy);
-
-        if (this.levelUp.shouldLevelUp(LevelUpType.ATTACK) || (this.levelUp.shouldLevelUp(LevelUpType.KILL) && enemy.isDead())) {
-            checkLevelUp();
-        }
-        else if (this.levelUp.shouldLevelUp(LevelUpType.CAUSE_DAMAGE)) {
-            checkLevelUp(this.damage);
-        }
+    protected void decreaseLevelUpPoints() {
+        this.levelUpPoints = Math.max(this.levelUpPoints - 1, 0);
+        checkUpgrade();
     }
 
-    @Override
-    public void increaseDamage(int amount) {
-        super.increaseDamage(amount);
-
-        if (this.levelUp.shouldLevelUp(LevelUpType.IMPROVE_DAMAGE)) {
-            checkLevelUp(amount);
-        }
+    protected void decreaseLevelUpPoints(int points) {
+        this.levelUpPoints = Math.max(this.levelUpPoints - points, 0);
+        checkUpgrade();
     }
 
-    private void canUpgrade() {
-        if (this.levelUp.upgradeChampion()) {
+    private boolean canUpgrade() {
+        return this.levelUpPoints == 0 && !alreadyPassedLevel;
+    }
+
+    private void checkUpgrade() {
+        if (canUpgrade()) {
             upgradeLevel();
+            this.alreadyPassedLevel = true;
         }
-    }
-
-    private void checkLevelUp() {
-        this.levelUp.changeLevelUpPoints();
-        canUpgrade();
-    }
-
-    private void checkLevelUp(int points) {
-        this.levelUp.changeLevelUpPoints(points);
-        canUpgrade();
     }
 
     private void upgradeLevel() {
-        for (ChampionUpgrade championUpgrade : this.championUpgrades) {
-            championUpgrade.upgradeLevel(this);
-        }
+        this.championUpgrades.forEach(championUpgrade -> championUpgrade.upgradeLevel(this));
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Champion.class.getSimpleName() + "[", "]")
+                .add(super.toString())
+                .add("damage=" + damage)
+                .add("health=" + health)
+                .add("upgrade=" + alreadyPassedLevel)
+                .toString();
     }
 }
