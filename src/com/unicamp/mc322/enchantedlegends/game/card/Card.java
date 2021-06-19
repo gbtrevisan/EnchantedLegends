@@ -35,10 +35,9 @@ public abstract class Card {
     }
 
     public void activate(GameState gameState) {
-        this.applyEffects(gameState, Event.ACTIVATION);
-
         try {
             gameState.getSelf().getMana().use(cost);
+            this.applyEffects(gameState, Event.ACTIVATION);
         } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
         }
