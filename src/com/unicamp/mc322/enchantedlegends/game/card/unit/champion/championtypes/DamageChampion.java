@@ -1,5 +1,6 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.championtypes;
 
+import com.unicamp.mc322.enchantedlegends.game.card.trait.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.ChampionUpgrade;
@@ -13,7 +14,7 @@ public class DamageChampion extends Champion {
     }
 
     @Override
-    public void combat(Follower enemy) {
+    public void combat(Follower enemy) throws TraitException {
         super.combat(enemy);
         this.decreaseLevelUpPoints(this.damage);
     }

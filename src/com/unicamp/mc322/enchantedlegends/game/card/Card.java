@@ -1,8 +1,9 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
-import com.unicamp.mc322.enchantedlegends.game.card.mana.ManaException;
-import com.unicamp.mc322.enchantedlegends.game.event.Event;
+import com.unicamp.mc322.enchantedlegends.game.card.exception.CardCreationException;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientManaException;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.event.Event;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 
 import java.util.Arrays;
@@ -12,9 +13,9 @@ import java.util.StringJoiner;
 
 public abstract class Card {
 
-    private final String name;
     protected final int cost;
     protected final List<Effect> effects;
+    private final String name;
 
     public Card(String name, int cost, Effect... effects) {
         Objects.requireNonNull(name, "Card name must not be null");
@@ -22,7 +23,7 @@ public abstract class Card {
         this.name = name;
 
         if (cost < 0) {
-            throw new CardException("Card cost must not be negative");
+            throw new CardCreationException("Card cost must not be negative");
         }
 
         this.cost = cost;
@@ -34,11 +35,10 @@ public abstract class Card {
     }
 
     public void activate(GameState gameState) {
-        this.applyEffects(gameState, Event.ACTIVATION);
-
         try {
             gameState.getSelf().getMana().use(cost);
-        } catch (ManaException e) {
+            this.applyEffects(gameState, Event.ACTIVATION);
+        } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
         }
     }
