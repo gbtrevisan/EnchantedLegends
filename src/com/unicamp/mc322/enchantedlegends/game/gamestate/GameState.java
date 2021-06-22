@@ -3,10 +3,8 @@ package com.unicamp.mc322.enchantedlegends.game.gamestate;
 import com.unicamp.mc322.enchantedlegends.game.arena.Arena;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.player.Player;
-import com.unicamp.mc322.enchantedlegends.game.queue.Combat;
 import com.unicamp.mc322.enchantedlegends.game.queue.CombatQueue;
-
-import java.util.List;
+import com.unicamp.mc322.enchantedlegends.game.util.Pair;
 
 public class GameState {
     private static GameState instance;
@@ -59,30 +57,23 @@ public class GameState {
     }
 
     public void setStateToCombat() {
-        List<Follower> attackers = this.arena.getAttackers();
-        List<Follower> defenders = this.arena.getDefenders();
-
-        if (defenders.size() != attackers.size()) {
+        if (arena.hasNotTheSameAmountForEach()) {
             throw new RuntimeException("Attackers size != defenders size"); // n qro pensar mt nisso agora (n eh o objetivo deste pr)
         }
 
-        for (int i = 0; i < attackers.size(); i++) {
-            this.addToCombatQueue(attackers.get(i), defenders.get(i));
+        for (int i = 0; i < arena.getAttackersSize(); i++) {
+            this.combats.add(arena.getPair(i));
         }
-    }
-
-    public void addToCombatQueue(Follower attacker, Follower defender) {
-        this.combats.add(new Combat(attacker, defender));
     }
 
     public Follower getCurrentDefender() {
-        Combat combat = this.combats.peek();
+        Pair<Follower, Follower> combatPair = this.combats.peek();
 
-        if (combat == null) {
+        if (combatPair == null) {
             throw new RuntimeException("Unexpected error: Combat is null!");
         }
 
-        return combat.getDefender();
+        return combatPair.getRight();
     }
 
     public void nextTurn() {
