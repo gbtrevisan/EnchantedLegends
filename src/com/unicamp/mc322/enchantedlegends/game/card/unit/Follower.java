@@ -40,9 +40,9 @@ public class Follower extends Card {
     }
 
     @Override
-    public void activate(GameState gameState) {
-        super.activate(gameState);
-        this.evoke(gameState);
+    public void activate() {
+        super.activate();
+        this.evoke();
     }
 
     public void combat(Follower enemy) throws TraitException {
@@ -100,8 +100,8 @@ public class Follower extends Card {
         }
     }
 
-    private void evoke(GameState gameState) {
-        gameState.getSelf().addToEvokedUnits(this);
+    private void evoke() {
+        GameState.getInstance().getSelf().addToEvokedUnits(this);
     }
 
     @Override

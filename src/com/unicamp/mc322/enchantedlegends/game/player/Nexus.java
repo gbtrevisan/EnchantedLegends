@@ -11,4 +11,8 @@ public class Nexus {
     public void receiveDamage(int amount) {
         this.health = Math.max(health - amount, 0);
     }
+
+    public boolean isDead() {
+        return this.health == 0;
+    }
 }

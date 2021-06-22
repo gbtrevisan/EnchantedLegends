@@ -30,14 +30,14 @@ public abstract class Card {
         this.effects = Arrays.asList(effects);
     }
 
-    protected void applyEffects(GameState gameState, Event event) {
-        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(effect -> effect.apply(gameState));
+    protected void applyEffects(Event event) {
+        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(Effect::apply);
     }
 
-    public void activate(GameState gameState) {
+    public void activate() {
         try {
-            gameState.getSelf().getMana().use(cost);
-            this.applyEffects(gameState, Event.ACTIVATION);
+            GameState.getInstance().getSelf().getMana().use(cost);
+            this.applyEffects(Event.ACTIVATION);
         } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
         }
