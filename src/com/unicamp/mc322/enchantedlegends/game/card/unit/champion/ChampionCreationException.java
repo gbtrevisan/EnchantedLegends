@@ -4,6 +4,7 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.FollowerCreationExcepti
 
 public class ChampionCreationException extends FollowerCreationException {
     public ChampionCreationException() {
+        super();
     }
 
     public ChampionCreationException(String s) {

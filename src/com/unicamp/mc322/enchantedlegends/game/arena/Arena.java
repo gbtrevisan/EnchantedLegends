@@ -1,6 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.arena;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
+import com.unicamp.mc322.enchantedlegends.game.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +32,20 @@ public class Arena {
         this.defenders.remove(follower);
     }
 
-    public List<Follower> getAttackers() {
-        return attackers;
+    public boolean hasNotTheSameAmountForEach() {
+        return attackers.size() != defenders.size();
     }
 
-    public List<Follower> getDefenders() {
-        return defenders;
+    public int getAttackersSize() {
+        return attackers.size();
+    }
+
+    public int getDefendersSize() {
+        return defenders.size();
+    }
+
+    public Pair<Follower, Follower> getPair(int i) {
+        return Pair.of(attackers.get(i), defenders.get(i));
     }
 
     public void clear() {

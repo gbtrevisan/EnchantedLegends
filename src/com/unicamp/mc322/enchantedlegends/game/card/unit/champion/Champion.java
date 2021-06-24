@@ -29,18 +29,18 @@ public abstract class Champion extends Follower {
         this.alreadyPassedLevel = false;
     }
 
-    public void addEffect(Effect effectAdd) {
-        this.effects.add(effectAdd);
+    public void addEffect(Effect effect) {
+        this.effects.add(effect);
     }
 
     protected void decreaseLevelUpPoints() {
         this.levelUpPoints = Math.max(this.levelUpPoints - 1, 0);
-        checkUpgrade();
+        this.checkUpgrade();
     }
 
     protected void decreaseLevelUpPoints(int points) {
         this.levelUpPoints = Math.max(this.levelUpPoints - points, 0);
-        checkUpgrade();
+        this.checkUpgrade();
     }
 
     private boolean canUpgrade() {
@@ -49,7 +49,7 @@ public abstract class Champion extends Follower {
 
     private void checkUpgrade() {
         if (canUpgrade()) {
-            upgradeLevel();
+            this.upgradeLevel();
             this.alreadyPassedLevel = true;
         }
     }

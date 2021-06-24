@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.championtypes;
+package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types;
 
 import com.unicamp.mc322.enchantedlegends.game.card.trait.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
@@ -8,14 +8,14 @@ import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 
 import java.util.List;
 
-public class DamageChampion extends Champion {
-    public DamageChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
+public class ReciveDamageToLevelUpChampion extends Champion {
+    public ReciveDamageToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
         super(name, cost, damage, health, levelUpPoints, championUpgrades, effects);
     }
 
     @Override
     public void combat(Follower enemy) throws TraitException {
         super.combat(enemy);
-        this.decreaseLevelUpPoints(this.damage);
+        this.decreaseLevelUpPoints(enemy.getDamage());
     }
 }

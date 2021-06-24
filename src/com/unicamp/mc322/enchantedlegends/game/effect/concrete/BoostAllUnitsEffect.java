@@ -6,7 +6,6 @@ import com.unicamp.mc322.enchantedlegends.game.effect.OnActivateEffect;
 public class BoostAllUnitsEffect extends OnActivateEffect {
 
     @Override
-    public void apply(GameState gameState) {
-
+    public void apply() {
     }
 }
