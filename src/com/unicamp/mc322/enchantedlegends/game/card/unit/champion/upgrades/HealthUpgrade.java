@@ -2,10 +2,10 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
 
-public class LifeUpgrade implements ChampionUpgrade {
+public class HealthUpgrade implements ChampionUpgrade {
     private final int healthPoints;
 
-    public LifeUpgrade(int healthPoints) {
+    public HealthUpgrade(int healthPoints) {
         this.healthPoints = healthPoints;
 
         if (this.healthPoints <= 0) {

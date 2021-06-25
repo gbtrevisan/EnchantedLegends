@@ -2,10 +2,10 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
 
-public class StrengthUpgrade implements ChampionUpgrade {
+public class DamageUpgrade implements ChampionUpgrade {
     private final int damagePoints;
 
-    public StrengthUpgrade(int damagePoints) {
+    public DamageUpgrade(int damagePoints) {
         this.damagePoints = damagePoints;
 
         if (this.damagePoints <= 0) {
