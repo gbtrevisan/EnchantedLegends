@@ -1,21 +1,19 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
+import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
+import com.unicamp.mc322.enchantedlegends.game.card.event.EventManager;
 import com.unicamp.mc322.enchantedlegends.game.card.exception.CardCreationException;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientManaException;
-import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
-import com.unicamp.mc322.enchantedlegends.game.event.Event;
-import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public abstract class Card {
-
     protected final int cost;
-    protected final List<Effect> effects;
     private final String name;
+    private final EventManager eventManager;
 
     public Card(String name, int cost, Effect... effects) {
         Objects.requireNonNull(name, "Card name must not be null");
@@ -27,17 +25,21 @@ public abstract class Card {
         }
 
         this.cost = cost;
-        this.effects = Arrays.asList(effects);
+        this.eventManager = new EventManager();
+
+        for (Effect effect : effects) {
+            eventManager.subscribe(effect);
+        }
     }
 
-    protected void applyEffects(Event event) {
-        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(Effect::apply);
+    private void updateEventManager(CardEvent event) {
+        eventManager.update(event);
     }
 
-    public void activate() {
+    public void activate(Mana mana) {
         try {
-            GameState.getInstance().getSelf().getMana().use(cost);
-            this.applyEffects(Event.ACTIVATION);
+            mana.use(cost);
+            updateEventManager(CardEvent.ACTIVATE);
         } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
         }
@@ -48,7 +50,6 @@ public abstract class Card {
         return new StringJoiner(", ", Card.class.getSimpleName() + "[", "]")
                 .add("name='" + name + "'")
                 .add("cost=" + cost)
-                .add("effects=" + effects)
                 .toString();
     }
 }
