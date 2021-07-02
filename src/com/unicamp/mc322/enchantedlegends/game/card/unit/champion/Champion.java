@@ -12,8 +12,8 @@ public abstract class Champion extends Follower {
     private boolean alreadyPassedLevel;
     private final List<ChampionUpgrade> championUpgrades;
 
-    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
-        super(name, cost, damage, health, effects);
+    public Champion(int id, String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
+        super(id, name, cost, damage, health, effects);
 
         if (levelUpPoints <= 0) {
             throw new ChampionCreationException("Points to pass a level must be greater than zero!");

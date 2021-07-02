@@ -16,8 +16,8 @@ public class Follower extends Card {
     protected int health;
     private List<Trait> traits;
 
-    public Follower(String name, int cost, int damage, int health, Effect... effects) {
-        super(name, cost, effects);
+    public Follower(int id, String name, int cost, int damage, int health, Effect... effects) {
+        super(id, name, cost, effects);
 
         if (damage < 0) {
             throw new FollowerCreationException("Follower's damage cannot be negative!");

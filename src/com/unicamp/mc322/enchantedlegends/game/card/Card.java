@@ -17,7 +17,7 @@ public abstract class Card {
     protected final List<Effect> effects;
     private final String name;
 
-    public Card(String name, int cost, Effect... effects) {
+    public Card(int id, String name, int cost, Effect... effects) {
         Objects.requireNonNull(name, "Card name must not be null");
 
         this.name = name;
