@@ -5,7 +5,6 @@ import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientManaException;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.event.Event;
-import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 
 import java.util.Arrays;
 import java.util.List;

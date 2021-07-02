@@ -1,6 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.trait.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
@@ -43,8 +44,8 @@ public class Follower extends Card {
     }
 
     @Override
-    public void activate() {
-        super.activate();
+    public void activate(Mana mana) {
+        super.activate(mana);
         this.evoke();
     }
 
