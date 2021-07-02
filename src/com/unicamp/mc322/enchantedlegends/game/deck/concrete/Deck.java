@@ -1,19 +1,18 @@
 package com.unicamp.mc322.enchantedlegends.game.deck.concrete;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
-import com.unicamp.mc322.enchantedlegends.game.deck.Deck;
 import com.unicamp.mc322.enchantedlegends.game.deck.DeckException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class DeckConsole implements Deck {
+public class Deck {
     private final List<Card> deckCards;
     private final static int MAX_CARDS = 40;
     private final static int INITIAL_HAND = 4;
 
-    public DeckConsole(List<Card> deckCards) {
+    public Deck(List<Card> deckCards) {
         if (deckCards.isEmpty() || deckCards.size() > MAX_CARDS) {
             throw new DeckException("Your deck cannot be empty or over " + MAX_CARDS + " cards");
         }

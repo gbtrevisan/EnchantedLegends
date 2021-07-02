@@ -7,24 +7,22 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/*
-    CARD BUILDER
-* */
-
-public class CardsCreator {
-    private static CardsCreator instance;
+public class CardsLoader {
+    private static CardsLoader instance;
     private final static String PATH_JSON = "src/com/unicamp/mc322/enchantedlegends/game/deck/cardscreator/all_cards.json";
-    private final List<Card> gameCards;
+    private final Map<String, Card> gameCards;
 
-    private CardsCreator() {
-        this.gameCards = new ArrayList<>();
+    private CardsLoader() {
+        this.gameCards = new HashMap<>();
     }
 
-    public static CardsCreator getInstance() {
+    public static CardsLoader getInstance() {
         if (instance == null) {
-            instance = new CardsCreator();
+            instance = new CardsLoader();
         }
 
         return instance;
@@ -50,8 +48,8 @@ public class CardsCreator {
     private List<Integer> cardStatus(JSONObject card) {
         List<Integer> statusCard = new ArrayList<>();
 
-        statusCard.add((int) ((long) card.get("health")));
-        statusCard.add((int) ((long) card.get("damage")));
+        statusCard.add((int) card.get("health"));
+        statusCard.add((int) card.get("damage"));
 
         return statusCard;
     }
@@ -62,8 +60,8 @@ public class CardsCreator {
         if (effecType.equalsIgnoreCase("BOOST_ALL_UNITS")) {
             return "BOOST_ALL_UNITS";
         } else if (effecType.equalsIgnoreCase("BOOST_UNIT")) {
-            int healthPoints = (int) ((long) effect.get("health"));
-            int damagePoints = (int) ((long) effect.get("damage"));
+            int healthPoints = (int) effect.get("health");
+            int damagePoints = (int) effect.get("damage");
 
             return "BOOST_UNIT Saude: " + healthPoints + " | Dano: " + damagePoints;
         } else if (effecType.equalsIgnoreCase("RECIEVE_CARD_ON_KILL")) {
@@ -122,10 +120,10 @@ public class CardsCreator {
             String type = (String) powerUp.get("type");
 
             if (type.equalsIgnoreCase("HEALTH")) {
-                int healthPoints = (int) ((long) powerUp.get("health"));
+                int healthPoints = (int) powerUp.get("health");
                 upgrades.add("HEALTH Pontos: " + healthPoints);
             } else if (type.equalsIgnoreCase("DAMAGE")) {
-                int damagePoints = (int) ((long) powerUp.get("damage"));
+                int damagePoints = (int) powerUp.get("damage");
                 upgrades.add("DAMAGE Pontos: " + damagePoints);
             } else if (type.equalsIgnoreCase("EFFECT")) {
                 JSONArray effect = (JSONArray) powerUp.get("effect");
