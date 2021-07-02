@@ -2,6 +2,7 @@ package com.unicamp.mc322.enchantedlegends.game.deck;
 
 public class DeckException extends IllegalArgumentException {
     public DeckException() {
+        super();
     }
 
     public DeckException(String s) {
