@@ -1,22 +1,24 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.trait.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
     private final int initialHealth;
-    protected int damage;
-    protected int health;
-    private List<Trait> traits;
+    private int damage;
+    private int health;
+    private final List<Trait> traits;
 
-    public Follower(String name, int cost, int damage, int health, Effect... effects) {
+    public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
         super(name, cost, effects);
 
         if (damage < 0) {
@@ -29,6 +31,8 @@ public class Follower extends Card {
 
         this.damage = damage;
         this.health = this.initialHealth = health;
+        this.traits = new ArrayList<>();
+        this.traits.add(trait);
     }
 
     public void addTrait(Trait trait) {
@@ -40,9 +44,25 @@ public class Follower extends Card {
     }
 
     @Override
-    public void activate() {
-        super.activate();
+    public void activate(Mana mana) {
+        super.activate(mana);
         this.evoke();
+    }
+
+    public boolean dontHasTrait(Trait trait) {
+        return !this.traits.contains(trait);
+    }
+
+    public boolean validateCombat(Follower enemy) {
+        try {
+            for(Trait trait: traits) {
+                trait.applyIfApplicable(this, enemy);
+            }
+
+            return true;
+        } catch (TraitException ex) {
+            return false;
+        }
     }
 
     public void combat(Follower enemy) throws TraitException {
@@ -92,10 +112,6 @@ public class Follower extends Card {
 
         this.damage += extraDamage;
         this.health += extraHealth;
-    }
-
-    public int getDamage() {
-        return damage;
     }
 
     private void checkAmount(int amount) {
