@@ -1,6 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
 import com.unicamp.mc322.enchantedlegends.game.card.exception.CardCreationException;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientManaException;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.event.Event;
@@ -34,9 +35,9 @@ public abstract class Card {
         effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(Effect::apply);
     }
 
-    public void activate() {
+    public void activate(Mana mana) {
         try {
-            GameState.getInstance().getSelf().getMana().use(cost);
+            mana.use(cost);
             this.applyEffects(Event.ACTIVATION);
         } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
