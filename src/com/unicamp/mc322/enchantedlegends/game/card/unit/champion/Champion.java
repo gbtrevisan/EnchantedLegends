@@ -1,5 +1,6 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion;
 
+import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.ChampionUpgrade;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
@@ -12,8 +13,8 @@ public abstract class Champion extends Follower {
     private boolean alreadyPassedLevel;
     private final List<ChampionUpgrade> championUpgrades;
 
-    public Champion(int id, String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
-        super(id, name, cost, damage, health, effects);
+    public Champion(int id, String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
+        super(id, name, cost, damage, health, trait, effects);
 
         if (levelUpPoints <= 0) {
             throw new ChampionCreationException("Points to pass a level must be greater than zero!");
