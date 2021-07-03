@@ -5,23 +5,23 @@ import com.unicamp.mc322.enchantedlegends.game.card.effect.exception.EffectExcep
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 
-public class NewUnitCardEffect extends Effect {
+public class AttackNexusEffect extends Effect {
 
-    private final String cardName;
+    private final int amount;
 
-    public NewUnitCardEffect(String cardName) {
-        super(CardEvent.ENEMY_DESTROYED);
+    public AttackNexusEffect(int damage) {
+        super(CardEvent.ACTIVATE);
 
-        if (cardName == null) {
-            throw new EffectException("NewUnitCardEffect cardName should not be null");
+        if (damage <= 0) {
+            throw new EffectException("AttackNexusEffect damage should be a positive number");
         }
 
-        this.cardName = cardName;
+        amount = damage;
     }
 
     @Override
     protected void apply() {
-        GameState.getInstance().getSelf().gainUnit(cardName);
+        GameState.getInstance().getSelf().attackEnemyNexus(amount);
     }
 
 }

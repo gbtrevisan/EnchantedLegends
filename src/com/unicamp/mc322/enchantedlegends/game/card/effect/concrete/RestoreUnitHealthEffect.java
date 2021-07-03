@@ -5,23 +5,23 @@ import com.unicamp.mc322.enchantedlegends.game.card.effect.exception.EffectExcep
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 
-public class NewUnitCardEffect extends Effect {
+public class RestoreUnitHealthEffect extends Effect {
 
-    private final String cardName;
+    private int amount;
 
-    public NewUnitCardEffect(String cardName) {
-        super(CardEvent.ENEMY_DESTROYED);
+    public RestoreUnitHealthEffect(int health) {
+        super(CardEvent.ACTIVATE);
 
-        if (cardName == null) {
-            throw new EffectException("NewUnitCardEffect cardName should not be null");
+        if (amount <= 0) {
+            throw new EffectException("RestoreUnitHealthEffect health should be a positive number");
         }
 
-        this.cardName = cardName;
+        amount = health;
     }
 
     @Override
     protected void apply() {
-        GameState.getInstance().getSelf().gainUnit(cardName);
+        GameState.getInstance().getSelf().restoreUnitHealth(amount);
     }
 
 }

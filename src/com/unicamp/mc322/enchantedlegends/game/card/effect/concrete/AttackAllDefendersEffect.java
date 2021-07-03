@@ -4,15 +4,15 @@ import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 
-public class UnitAttackNexusEffect extends Effect {
+public class AttackAllDefendersEffect extends Effect {
 
-    public UnitAttackNexusEffect() {
-        super(CardEvent.ACTIVATE);
+    public AttackAllDefendersEffect() {
+        super(CardEvent.COMBAT);
     }
 
     @Override
     protected void apply() {
-        GameState.getInstance().getSelf().attackEnemyNexus(GameState.getInstance().getEnemy());
+        GameState.getInstance().getSelf().attackAllEnemyDefenders(GameState.getInstance().getEnemy());
     }
 
 }

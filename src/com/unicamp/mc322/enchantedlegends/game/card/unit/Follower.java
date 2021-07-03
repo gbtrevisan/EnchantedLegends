@@ -2,22 +2,22 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.event.EventManager;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
-import java.util.List;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
-    private final int initialHealth;
-    protected int damage;
-    protected int health;
-    private List<Trait> traits;
 
-    public Follower(String name, int cost, int damage, int health, Effect... effects) {
+    protected Attack attack;
+    protected final Defense defense;
+    private final EventManager eventManager;
+
+    public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
         super(name, cost, effects);
 
         if (damage < 0) {
@@ -28,16 +28,14 @@ public class Follower extends Card {
             throw new FollowerCreationException("Follower's health cannot be negative!");
         }
 
-        this.damage = damage;
-        this.health = this.initialHealth = health;
+        attack = new Attack(damage);
+        defense = new Defense(health);
+        eventManager = new EventManager();
+        eventManager.subscribe(trait);
     }
 
     public void addTrait(Trait trait) {
-        this.traits.add(trait);
-    }
-
-    public List<Trait> getTraits() {
-        return traits;
+        eventManager.subscribe(trait);
     }
 
     @Override
@@ -47,75 +45,57 @@ public class Follower extends Card {
     }
 
     public void combat(Follower enemy) throws TraitException {
-        for (Trait trait : traits) {
-            trait.applyIfApplicable(this, enemy);
-        }
-
-        enemy.loseHealth(this.damage);
-        this.loseHealth(enemy.damage);
-
-        for (Trait trait : traits) {
-            trait.applyIfApplicable(this, enemy);
-        }
+        enemy.loseHealth(this.attack.causeDamage());
+        this.loseHealth(enemy.attack.causeDamage());
     }
 
     public void attackNexus(Nexus enemyNexus) {
-        enemyNexus.receiveDamage(this.damage);
+        enemyNexus.receiveDamage(this.attack.causeDamage());
     }
 
     public void loseDamage(int amount) {
-        checkAmount(amount);
-        this.damage = Math.min(damage - amount, 0);
+        this.attack.loseDamage(amount);
     }
 
     public void increaseDamage(int amount) {
-        checkAmount(amount);
-        this.damage += amount;
+        this.attack.increaseDamage(amount);
+    }
+
+    public void annulAttack() {
+        attack.annulDamage();
     }
 
     public void loseHealth(int amount) {
-        checkAmount(amount);
-        this.health = Math.min(health - amount, 0);
+        defense.loseHealth(amount);
     }
 
     public void increaseHealth(int amount) {
-        checkAmount(amount);
-        this.health += amount;
+        defense.healHealth(amount);
     }
 
     public boolean isDead() {
-        return this.health == 0;
+        return defense.isDead();
     }
 
-    public void buff(int extraDamage, int extraHealth) {
-        checkAmount(extraDamage);
-        checkAmount(extraHealth);
-
-        this.damage += extraDamage;
-        this.health += extraHealth;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    private void checkAmount(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("The amount must not be negative!");
-        }
+    public void buff(int damage, int health) {
+        this.attack.increaseDamage(damage);
+        this.defense.healHealth(health);
     }
 
     private void evoke() {
-        GameState.getInstance().getSelf().addToEvokedUnits(this);
+        GameState.getInstance().getSelf().evokeUnit(this);
+    }
+
+    public void gainBarrier() {
+        defense.activateBarrier();
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", Follower.class.getSimpleName() + "[", "]")
                 .add(super.toString())
-                .add("damage=" + damage)
-                .add("health=" + health)
-                .add("initialHealth=" + initialHealth)
+                .add(attack.toString())
+                .add(defense.toString())
                 .toString();
     }
 }

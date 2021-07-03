@@ -1,9 +1,11 @@
 package com.unicamp.mc322.enchantedlegends.game.card.event;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventManager {
-    private final ArrayList<EventListener> eventListeners;
+
+    private final List<EventListener> eventListeners;
 
     public EventManager() {
         eventListeners = new ArrayList<>();
@@ -22,4 +24,5 @@ public class EventManager {
             eventListener.update(event);
         }
     }
+
 }

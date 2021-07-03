@@ -32,7 +32,7 @@ public abstract class Card {
         }
     }
 
-    private void updateEventManager(CardEvent event) {
+    protected void updateEventManager(CardEvent event) {
         eventManager.update(event);
     }
 
@@ -43,6 +43,10 @@ public abstract class Card {
         } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
         }
+    }
+
+    public void addEffect(Effect effect) {
+        eventManager.subscribe(effect);
     }
 
     @Override
