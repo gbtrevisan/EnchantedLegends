@@ -13,7 +13,7 @@ import java.util.StringJoiner;
 
 public class Follower extends Card {
 
-    protected Attack attack;
+    protected final Attack attack;
     protected final Defense defense;
     private final EventManager eventManager;
 
@@ -88,6 +88,10 @@ public class Follower extends Card {
 
     public void gainBarrier() {
         defense.activateBarrier();
+    }
+
+    public int getDamage() {
+        return attack.getDamage();
     }
 
     @Override

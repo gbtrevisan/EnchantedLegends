@@ -62,7 +62,7 @@ public class GameState {
         }
 
         for (int i = 0; i < arena.getAttackersSize(); i++) {
-            this.combats.add(arena.getPair(i));
+            this.addCombat(arena.getPair(i));
         }
     }
 
@@ -74,6 +74,10 @@ public class GameState {
         }
 
         return combatPair.getRight();
+    }
+
+    public void addCombat(Pair<Follower, Follower> combatPair) {
+        this.combats.add(combatPair);
     }
 
     public void nextTurn() {

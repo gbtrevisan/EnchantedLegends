@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public abstract class Champion extends Follower {
+
     private int levelUpPoints;
     private boolean alreadyPassedLevel;
     private final List<ChampionUpgrade> championUpgrades;

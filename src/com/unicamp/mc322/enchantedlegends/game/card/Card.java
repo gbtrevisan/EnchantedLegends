@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public abstract class Card {
+
     protected final int cost;
     private final String name;
     private final EventManager eventManager;

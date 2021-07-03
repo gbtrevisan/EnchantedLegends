@@ -10,6 +10,7 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.Champ
 import java.util.List;
 
 public class KillToLevelUpChampion extends Champion {
+
     public KillToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
         super(name, cost, damage, health, levelUpPoints, championUpgrades, trait, effects);
     }

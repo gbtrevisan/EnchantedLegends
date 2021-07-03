@@ -38,6 +38,10 @@ public class Attack {
         currentDamage = 0;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
     @Override
     public String toString() {
         return "damage=" + currentDamage;
