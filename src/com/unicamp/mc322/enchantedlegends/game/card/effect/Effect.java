@@ -28,5 +28,4 @@ public abstract class Effect implements EventListener {
     public boolean matchEvent(CardEvent event) {
         return this.event == event;
     }
-
 }
