@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.filemanager.converter;
+package com.unicamp.mc322.enchantedlegends.game.filemanager.json.converter;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 
@@ -6,43 +6,28 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JsonConverterToCard extends JsonConverter {
     public JsonConverterToCard() {
     }
 
     @Override
-    protected Object getJSONObject(FileReader json) throws ParseException, IOException {
-        Map<String, Card> gameCards = new HashMap<>();
-        JSONObject jsonFile = (JSONObject) this.parser.parse(json);
+    protected Object getJSONObject(String json) throws ParseException, IOException {
+        JSONObject cardJson = (JSONObject) this.parser.parse(json);
 
-        JSONArray cards = (JSONArray) jsonFile.get("cards");
+        String cardType = getClassStringAttribute(cardJson, "type");
+        JsonConverter cardCreator = getJsonConverter(cardType);
 
-        for (Object card : cards) {
-            JSONObject gameCard = (JSONObject) card;
+        Card gameCard = (Card) cardCreator.getJSONObject(json);
 
-            String cardName = (String) gameCard.get("name");
-            String cardType = (String) gameCard.get("type");
-            JsonConverter cardCreator = getJsonConverter(cardType);
-
-            gameCards.put(cardName, (Card) cardCreator.getJSONObject(json));
-        }
-
-        return gameCards;
+        return gameCard;
     }
 
-    public Map<String, Card> createCard(FileReader json) throws ParseException, IOException {
-        return (Map<String, Card>) getJSONObject(json);
-    }
-
-    protected int getClassAtribute(JSONObject cardObject, String atributeName) {
-        return (int) cardObject.get(atributeName);
+    public Card createCard(String json) throws ParseException, IOException {
+        return (Card) getJSONObject(json);
     }
 
     protected List<String> loadEffect(JSONArray effectJSON) {
@@ -77,8 +62,8 @@ public class JsonConverterToCard extends JsonConverter {
         if (effecType.equalsIgnoreCase("BOOST_ALL_UNITS")) {
             return "BOOST_ALL_UNITS";
         } else if (effecType.equalsIgnoreCase("BOOST_UNIT")) {
-            int healthPoints = getClassAtribute(effect, "health");
-            int damagePoints = getClassAtribute(effect, "damage");
+            int healthPoints = getClassIntAttribute(effect, "health");
+            int damagePoints = getClassIntAttribute(effect, "damage");
 
             return "BOOST_UNIT Saude: " + healthPoints + " | Dano: " + damagePoints;
         } else if (effecType.equalsIgnoreCase("RECIEVE_CARD_ON_KILL")) {

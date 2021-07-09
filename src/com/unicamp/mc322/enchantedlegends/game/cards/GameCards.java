@@ -21,11 +21,11 @@ public class GameCards {
         return instance;
     }
 
-    public void addGameCard(Map<String, Card> gameCards) {
-        this.gameCards = gameCards;
+    public void addGameCard(Card gameCard) {
+        this.gameCards.put(gameCard.getName(), gameCard);
     }
 
-    public Card getCard(String cardName) {
+    public Card getByName(String cardName) {
         if (!this.gameCards.containsKey(cardName)) {
             throw new GameCardException("Could not find any card with this name (name = " + cardName + ")");
         }

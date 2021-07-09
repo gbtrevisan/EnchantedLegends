@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.filemanager.converter;
+package com.unicamp.mc322.enchantedlegends.game.filemanager.json.converter;
 
 import com.unicamp.mc322.enchantedlegends.game.card.trait.DoubleAttackTrait;
 import com.unicamp.mc322.enchantedlegends.game.card.trait.ElusiveTrait;
@@ -8,8 +8,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +23,13 @@ public abstract class JsonConverterToUnit extends JsonConverterToCard {
         this.cardEffects = new ArrayList<>();
     }
 
-    protected void getUnitInformation(FileReader json) throws ParseException, IOException {
+    protected void getUnitInformation(String json) throws ParseException {
         JSONObject jsonFIile = (JSONObject) this.parser.parse(json);
 
-        this.name = (String) jsonFIile.get("name");
-        this.cost = getClassAtribute(jsonFIile, "cost");
-        this.health = getClassAtribute(jsonFIile, "health");
-        this.damage = getClassAtribute(jsonFIile, "damage");
+        this.name = getClassStringAttribute(jsonFIile, "name");
+        this.cost = getClassIntAttribute(jsonFIile, "cost");
+        this.health = getClassIntAttribute(jsonFIile, "health");
+        this.damage = getClassIntAttribute(jsonFIile, "damage");
 
         JSONArray effects = (JSONArray) jsonFIile.get("effects") ;
         this.cardEffects = loadEffect(effects);
@@ -47,8 +45,8 @@ public abstract class JsonConverterToUnit extends JsonConverterToCard {
             String traitType = (String) traitJSON.get("type");
 
             if (traitType.equalsIgnoreCase("FURY")) {
-                int health = getClassAtribute(traitJSON, "health");
-                int damage = getClassAtribute(traitJSON, "damage");
+                int health = getClassIntAttribute(traitJSON, "health");
+                int damage = getClassIntAttribute(traitJSON, "damage");
 
                 trait = new FuryTrait(damage, health);
             } else if (traitType.equalsIgnoreCase("DOUBLE_ATTACK")) {

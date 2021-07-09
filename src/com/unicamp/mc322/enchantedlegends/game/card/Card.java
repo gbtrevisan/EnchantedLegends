@@ -30,10 +30,6 @@ public abstract class Card {
         this.effects = Arrays.asList(effects);
     }
 
-    protected void applyEffects(Event event) {
-        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(Effect::apply);
-    }
-
     public void activate(Mana mana) {
         try {
             mana.use(cost);
@@ -41,6 +37,14 @@ public abstract class Card {
         } catch (InsufficientManaException e) {
             throw new CardException("Not enough mana to activate this card!", e);
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    protected void applyEffects(Event event) {
+        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(Effect::apply);
     }
 
     @Override

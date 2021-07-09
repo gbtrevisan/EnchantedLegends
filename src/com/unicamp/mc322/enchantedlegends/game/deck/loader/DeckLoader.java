@@ -1,8 +1,8 @@
 package com.unicamp.mc322.enchantedlegends.game.deck.loader;
 
 import com.unicamp.mc322.enchantedlegends.game.deck.concrete.Deck;
-import com.unicamp.mc322.enchantedlegends.game.filemanager.FileLoader;
-import com.unicamp.mc322.enchantedlegends.game.filemanager.converter.JsonConverterToDeck;
+import com.unicamp.mc322.enchantedlegends.game.filemanager.json.JsonLoader;
+import com.unicamp.mc322.enchantedlegends.game.filemanager.json.converter.JsonConverterToDeck;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -21,10 +21,10 @@ public class DeckLoader {
         return instance;
     }
 
-    public Deck createDeck(String path) throws ParseException, IOException {
+    public Deck createDeck(String fileName) throws ParseException, IOException {
         JsonConverterToDeck jsonConverterToDeck = new JsonConverterToDeck();
-        FileLoader fileLoader = FileLoader.getInstance();
+        JsonLoader jsonLoader = JsonLoader.getInstance();
 
-        return jsonConverterToDeck.getDeck(fileLoader.loadFile(path));
+        return jsonConverterToDeck.getDeck(jsonLoader.loadJson(fileName));
     }
 }

@@ -3,7 +3,7 @@ package com.unicamp.mc322.enchantedlegends.game.deck.data;
 import com.unicamp.mc322.enchantedlegends.game.deck.DeckException;
 import com.unicamp.mc322.enchantedlegends.game.deck.concrete.Deck;
 import com.unicamp.mc322.enchantedlegends.game.deck.loader.DeckLoader;
-import com.unicamp.mc322.enchantedlegends.game.filemanager.FileLoader;
+import com.unicamp.mc322.enchantedlegends.game.filemanager.json.FileLoader;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -16,8 +16,8 @@ public class Decks {
     private static Decks instance;
     private final DeckLoader deckLoader;
     private final List<Deck>  decks;
-    private final static String RELATIVE_PATH_JSON = "src/com/unicamp/mc322/enchantedlegends/game/deck/data/";
-    private final static String DECK_FILE = "Deck.json";
+    private final static String RELATIVE_PATH_JSON = "src/com/unicamp/mc322/enchantedlegends/game/deck/decksdata/";
+    private final static String DECK_FILE = "_deck.json";
 
     private Decks() {
         this.decks = new ArrayList<>();

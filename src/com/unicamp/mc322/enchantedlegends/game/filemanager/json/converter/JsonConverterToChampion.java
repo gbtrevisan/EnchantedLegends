@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.filemanager.converter;
+package com.unicamp.mc322.enchantedlegends.game.filemanager.json.converter;
 
 import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
@@ -9,8 +9,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +17,13 @@ public class JsonConverterToChampion extends JsonConverterToUnit {
     }
 
     @Override
-    protected Champion getJSONObject(FileReader json) throws ParseException, IOException {
+    protected Champion getJSONObject(String json) throws ParseException {
         getUnitInformation(json);
         JSONObject jsonFIile = (JSONObject) this.parser.parse(json);
 
         JSONObject typeChampion = (JSONObject) jsonFIile.get("levelup");
-        String championType = (String) typeChampion.get("type");
-        int pointsUpgrade = getClassAtribute(typeChampion, "points");
+        String championType = getClassStringAttribute(typeChampion, "type");
+        int pointsUpgrade = getClassIntAttribute(typeChampion, "points");
 
         List<ChampionUpgrade> upgrades = loadCardUpgrade(typeChampion);
 
@@ -58,10 +56,10 @@ public class JsonConverterToChampion extends JsonConverterToUnit {
             String type = (String) powerUp.get("type");
 
             if (type.equalsIgnoreCase("HEALTH")) {
-                int healthPoints = getClassAtribute(powerUp, "health");
+                int healthPoints = getClassIntAttribute(powerUp, "health");
                 upgrades.add(new HealthUpgrade(healthPoints));
             } else if (type.equalsIgnoreCase("DAMAGE")) {
-                int damagePoints = getClassAtribute(powerUp, "damage");
+                int damagePoints = getClassIntAttribute(powerUp, "damage");
                 upgrades.add(new DamageUpgrade(damagePoints));
             } else if (type.equalsIgnoreCase("EFFECT")) {
                 JSONArray effect = (JSONArray) powerUp.get("effect");

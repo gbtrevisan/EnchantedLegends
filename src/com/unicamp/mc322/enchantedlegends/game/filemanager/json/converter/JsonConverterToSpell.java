@@ -1,12 +1,10 @@
-package com.unicamp.mc322.enchantedlegends.game.filemanager.converter;
+package com.unicamp.mc322.enchantedlegends.game.filemanager.json.converter;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Spell;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 public class JsonConverterToSpell extends JsonConverterToCard {
@@ -14,11 +12,11 @@ public class JsonConverterToSpell extends JsonConverterToCard {
     }
 
     @Override
-    protected Spell getJSONObject(FileReader json) throws ParseException, IOException {
+    protected Spell getJSONObject(String json) throws ParseException {
         JSONObject jsonFIile = (JSONObject) this.parser.parse(json);
-        String name = (String) jsonFIile.get("name");
+        String name = getClassStringAttribute(jsonFIile, "name");
 
-        int cost = getClassAtribute(jsonFIile, "cost");
+        int cost = getClassIntAttribute(jsonFIile, "cost");
 
         JSONArray effects = (JSONArray) jsonFIile.get("effects");
         List<String> cardEffect = loadEffect(effects);
@@ -28,7 +26,7 @@ public class JsonConverterToSpell extends JsonConverterToCard {
 
 
 
-    protected Spell getSpell(FileReader json) throws ParseException, IOException {
+    protected Spell getSpell(String json) throws ParseException {
         return (Spell) getJSONObject(json);
     }
 }
