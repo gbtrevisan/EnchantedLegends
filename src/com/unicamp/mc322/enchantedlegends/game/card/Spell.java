@@ -10,7 +10,7 @@ public class Spell extends Card {
 
         for (Effect effect : effects) {
             if (!effect.matchEvent(CardEvent.ACTIVATE)) {
-                throw new SpellCreationException("Spell should have only ACTIVATE effects");
+                throw new SpellCreationException("Spell must have only ACTIVATE effects");
             }
         }
     }
