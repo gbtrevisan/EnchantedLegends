@@ -13,10 +13,13 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
-    private final int initialHealth;
+    private int initialHealth;
     protected int damage;
     protected int health;
     private List<Trait> traits;
+
+    public Follower() {
+    }
 
     public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
         super(name, cost, effects);
@@ -135,6 +138,7 @@ public class Follower extends Card {
                 .add("damage=" + damage)
                 .add("health=" + health)
                 .add("initialHealth=" + initialHealth)
+                .add("traits=" + traits)
                 .toString();
     }
 }

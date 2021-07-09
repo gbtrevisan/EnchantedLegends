@@ -21,8 +21,8 @@ public class GameCards {
         return instance;
     }
 
-    public void addGameCard(Map<String, Card> gameCards) {
-        this.gameCards = gameCards;
+    public void addCard(Card card) {
+        this.gameCards.put(card.getName(), card);
     }
 
     public Card getCard(String cardName) {

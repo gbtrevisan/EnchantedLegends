@@ -3,7 +3,7 @@ package com.unicamp.mc322.enchantedlegends.game.deck.data;
 import com.unicamp.mc322.enchantedlegends.game.deck.DeckException;
 import com.unicamp.mc322.enchantedlegends.game.deck.concrete.Deck;
 import com.unicamp.mc322.enchantedlegends.game.deck.loader.DeckLoader;
-import com.unicamp.mc322.enchantedlegends.game.filemanager.FileLoader;
+import com.unicamp.mc322.enchantedlegends.game.json.FileLoader;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;

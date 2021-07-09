@@ -1,5 +1,6 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
+import com.unicamp.mc322.enchantedlegends.game.GameObject;
 import com.unicamp.mc322.enchantedlegends.game.card.exception.CardCreationException;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientManaException;
@@ -11,11 +12,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public abstract class Card {
+public abstract class Card implements GameObject {
 
-    protected final int cost;
-    protected final List<Effect> effects;
-    private final String name;
+    protected int cost;
+    protected List<Effect> effects;
+    private String name;
+
+    public Card() {
+    }
 
     public Card(String name, int cost, Effect... effects) {
         Objects.requireNonNull(name, "Card name must not be null");
@@ -28,6 +32,10 @@ public abstract class Card {
 
         this.cost = cost;
         this.effects = Arrays.asList(effects);
+    }
+
+    public String getName() {
+        return name;
     }
 
     protected void applyEffects(Event event) {

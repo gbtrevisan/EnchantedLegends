@@ -1,35 +1,30 @@
 {
   "cards": [
     {
-      "type": "champion",
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types.AttackToLevelUpChampion",
       "name": "Garen",
       "cost": 5,
       "damage": 5,
       "health": 5,
       "effects": [],
-      "trait": null,
-      "levelup":
-      {
-        "type": "ATTACK",
-        "points": 2,
-        "powerups": [
+      "levelUpPoints": 2,
+      "upgrades": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.MagicUpgrade",
+          "trait":
           {
-            "type": "TRAIT",
-            "trait":
-            {
-              "type": "ELUSIVE"
-            }
-          },
-          {
-            "type": "DAMAGE",
-            "damage": 1
-          },
-          {
-            "type": "HEALTH",
-            "health": 1
+            "type": "com.unicamp.mc322.enchantedlegends.game.card.trait.ElusiveTrait"
           }
-        ]
-      }
+        },
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.DamageUpgrade",
+          "damagePoints": 1
+        },
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.HealthUpgrade",
+          "healthPoints": 1
+        }
+      ]
     },
 
     {

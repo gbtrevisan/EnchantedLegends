@@ -10,6 +10,8 @@ import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 import java.util.List;
 
 public class AttackToLevelUpChampion extends Champion {
+    public AttackToLevelUpChampion(){}
+
     public AttackToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
         super(name, cost, damage, health, levelUpPoints, championUpgrades, trait, effects);
     }

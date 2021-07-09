@@ -4,9 +4,14 @@ import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
 import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 
+import java.util.StringJoiner;
+
 public class MagicUpgrade implements ChampionUpgrade {
-    private final Effect effect;
-    private final Trait trait;
+    private Effect effect;
+    private Trait trait;
+
+    public MagicUpgrade() {
+    }
 
     public MagicUpgrade(Effect effect) {
         if (effect == null) {
@@ -33,5 +38,13 @@ public class MagicUpgrade implements ChampionUpgrade {
         } else {
             champion.addTrait(this.trait);
         }
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MagicUpgrade.class.getSimpleName() + "[", "]")
+                .add("effect=" + effect)
+                .add("trait=" + trait)
+                .toString();
     }
 }
