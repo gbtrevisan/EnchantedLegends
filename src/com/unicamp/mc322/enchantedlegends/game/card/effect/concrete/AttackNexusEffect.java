@@ -13,7 +13,7 @@ public class AttackNexusEffect extends Effect {
         super(CardEvent.ACTIVATE);
 
         if (damage <= 0) {
-            throw new EffectException("AttackNexusEffect damage should be a positive number");
+            throw new EffectException("AttackNexusEffect damage must be a positive number");
         }
 
         amount = damage;

@@ -10,7 +10,7 @@ public abstract class Effect implements EventListener {
 
     public Effect(CardEvent event) {
         if (event == null) {
-            throw new EffectException("Effect event should not be null");
+            throw new EffectException("Effect event must not be null");
         }
 
         this.event = event;
@@ -28,5 +28,4 @@ public abstract class Effect implements EventListener {
     public boolean matchEvent(CardEvent event) {
         return this.event == event;
     }
-
 }
