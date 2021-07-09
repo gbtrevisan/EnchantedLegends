@@ -45,7 +45,13 @@ public abstract class Player {
 
     }
 
-    public abstract void startImmediateCombat();
+    public abstract void chooseCard();
+
+    public abstract void chooseEnemyCard();
+
+    public void startImmediateCombat() {
+
+    }
 
     public void attackEnemyNexus(Player enemy) {
 

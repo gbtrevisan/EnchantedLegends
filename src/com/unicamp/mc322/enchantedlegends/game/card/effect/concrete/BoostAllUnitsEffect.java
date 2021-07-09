@@ -6,7 +6,7 @@ import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 public class BoostAllUnitsEffect extends BoostUnitEffect {
 
     public BoostAllUnitsEffect(int damage, int health) {
-        super(CardEvent.ACTIVATE, damage, health);
+        super(damage, health);
     }
 
     @Override

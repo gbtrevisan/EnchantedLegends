@@ -2,6 +2,7 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.card.event.EventManager;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
@@ -15,7 +16,6 @@ public class Follower extends Card {
 
     protected final Attack attack;
     protected final Defense defense;
-    private final EventManager eventManager;
 
     public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
         super(name, cost, effects);
@@ -30,12 +30,11 @@ public class Follower extends Card {
 
         attack = new Attack(damage);
         defense = new Defense(health);
-        eventManager = new EventManager();
-        eventManager.subscribe(trait);
+        super.addEventListener(trait);
     }
 
     public void addTrait(Trait trait) {
-        eventManager.subscribe(trait);
+        super.addEventListener(trait);
     }
 
     @Override
@@ -45,8 +44,17 @@ public class Follower extends Card {
     }
 
     public void combat(Follower enemy) throws TraitException {
+        super.updateEventManager(CardEvent.COMBAT);
         enemy.loseHealth(this.attack.causeDamage());
         this.loseHealth(enemy.attack.causeDamage());
+
+        if (enemy.isDead()) {
+            super.updateEventManager(CardEvent.ENEMY_DESTROYED);
+        }
+
+        if (this.isDead()) {
+            super.updateEventManager(CardEvent.BE_DESTROYED);
+        }
     }
 
     public void attackNexus(Nexus enemyNexus) {

@@ -4,7 +4,7 @@ public class Defense {
 
     private final int maxHealth;
     private int currentHealth;
-    private boolean barrier;
+    private boolean hasBarrier;
 
     Defense(int maxHealth) {
         if (maxHealth <= 0) {
@@ -12,7 +12,7 @@ public class Defense {
         }
 
         this.maxHealth = this.currentHealth = maxHealth;
-        barrier = false;
+        hasBarrier = false;
     }
 
     void loseHealth(int amount) {
@@ -20,8 +20,8 @@ public class Defense {
             throw new IllegalArgumentException("Damage amount should be greater or equal to 0");
         }
 
-        if (barrier && amount != 0) {
-            barrier = false;
+        if (hasBarrier && amount != 0) {
+            hasBarrier = false;
         } else {
             currentHealth = Math.max(currentHealth - amount, 0);
         }
@@ -32,7 +32,7 @@ public class Defense {
     }
 
     void activateBarrier() {
-        barrier = true;
+        hasBarrier = true;
     }
 
     boolean isDead() {

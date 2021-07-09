@@ -2,6 +2,7 @@ package com.unicamp.mc322.enchantedlegends.game.card;
 
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
+import com.unicamp.mc322.enchantedlegends.game.card.event.EventListener;
 import com.unicamp.mc322.enchantedlegends.game.card.event.EventManager;
 import com.unicamp.mc322.enchantedlegends.game.card.exception.CardCreationException;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
@@ -46,8 +47,8 @@ public abstract class Card {
         }
     }
 
-    public void addEffect(Effect effect) {
-        eventManager.subscribe(effect);
+    public void addEventListener(EventListener eventListener) {
+        eventManager.subscribe(eventListener);
     }
 
     @Override
