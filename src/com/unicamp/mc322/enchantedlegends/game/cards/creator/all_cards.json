@@ -1,7 +1,6 @@
 {
   "cards": [
     {
-      "id": 1,
       "type": "champion",
       "name": "Garen",
       "cost": 5,
@@ -34,7 +33,6 @@
     },
 
     {
-      "id": 2,
       "type": "follower",
       "name": "Vanguarda",
       "cost": 4,
@@ -51,7 +49,6 @@
     },
 
     {
-      "id": 3,
       "type": "follower",
       "name": "Duelista",
       "cost": 3,
@@ -60,14 +57,13 @@
       "effects": [
         {
           "type": "RECIEVE_CARD_ON_KILL",
-          "card": 6
+          "card": "Poro"
         }
       ],
       "trait": null
     },
 
     {
-      "id": 4,
       "type": "follower",
       "name": "Defensor",
       "cost": 2,
@@ -83,7 +79,6 @@
     },
 
     {
-      "id": 5,
       "type": "follower",
       "name": "Poro Defensor",
       "cost": 1,
@@ -98,7 +93,6 @@
     },
 
     {
-      "id": 6,
       "type": "follower",
       "name": "Poro",
       "cost": 1,
@@ -109,7 +103,6 @@
     },
 
     {
-      "id": 7,
       "type": "spell",
       "name": "Julgamento",
       "cost": 8,
@@ -121,7 +114,6 @@
     },
 
     {
-      "id": 8,
       "type": "spell",
       "name": "Valor Redobrado",
       "cost": 6,
@@ -133,7 +125,6 @@
     },
 
     {
-      "id": 9,
       "type": "spell",
       "name": "Golpe Certeiro",
       "cost": 1,
@@ -147,7 +138,6 @@
     },
 
     {
-      "id": 10,
       "type": "spell",
       "name": "Combate Imediato",
       "cost": 2,
@@ -159,7 +149,6 @@
     },
 
     {
-      "id": 11,
       "type": "champion",
       "name": "Braum",
       "cost": 4,
@@ -181,7 +170,6 @@
     },
 
     {
-      "id": 12,
       "type": "champion",
       "name": "Ezreal",
       "cost": 3,
@@ -203,7 +191,6 @@
     },
 
     {
-      "id": 13,
       "type": "follower",
       "name": "Cithria de Campinuvem",
       "cost": 1,
@@ -214,7 +201,6 @@
     },
 
     {
-      "id": 14,
       "type": "follower",
       "name": "Guardiã das Máscaras",
       "cost": 2,
@@ -231,7 +217,6 @@
     },
 
     {
-      "id": 15,
       "type": "follower",
       "name": "Artíficie das Areias",
       "cost": 4,
@@ -239,15 +224,13 @@
       "health": 5,
       "effects": [
         {
-          "type": "RECIEVE_RANDOM_CARD",
-          "card": 16
+          "type": "RECIEVE_RANDOM_CARD_ON_DIE"
         }
       ],
       "trait": null
     },
 
     {
-      "id": 16,
       "type": "follower",
       "name": "Saltador de Pedras",
       "cost": 2,
@@ -263,7 +246,6 @@
     },
 
     {
-      "id": 17,
       "type": "spell",
       "name": "Canhão de Poros",
       "cost": 0,
@@ -277,7 +259,6 @@
     },
 
     {
-      "id": 18,
       "type": "spell",
       "name": "Destreza em Campo",
       "cost": 1,
@@ -291,19 +272,17 @@
     },
 
     {
-      "id": 19,
       "type": "spell",
       "name": "Fugitivo",
       "cost": 1,
       "effects": [
         {
-          "type": "RECIEVE_RANDOM_CARD"
+          "type": "RECIEVE_RANDOM_CARD_ON_DIE"
         }
       ]
     },
 
     {
-      "id": 20,
       "type": "spell",
       "name": "Elixit da Ira",
       "cost": 2,
@@ -316,7 +295,6 @@
     },
 
     {
-      "id": 21,
       "type": "champion",
       "name": "Nasus",
       "cost": 6,
@@ -349,7 +327,6 @@
     },
 
     {
-      "id": 22,
       "type": "follower",
       "name": "Ceifeiro Baccai",
       "cost": 1,
@@ -380,7 +357,6 @@
     },
 
     {
-      "id": 24,
       "type": "follower",
       "name": "Pix!",
       "cost": 1,
@@ -397,7 +373,6 @@
     },
 
     {
-      "id": 25,
       "type": "follower",
       "name": "Sabotadora da Legião",
       "cost": 1,

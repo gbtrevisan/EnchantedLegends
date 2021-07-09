@@ -1,6 +1,8 @@
 package com.unicamp.mc322.enchantedlegends.game.deck;
 
-public class DeckException extends IllegalArgumentException {
+import com.unicamp.mc322.enchantedlegends.game.cards.GameCardException;
+
+public class DeckException extends GameCardException {
     public DeckException() {
         super();
     }

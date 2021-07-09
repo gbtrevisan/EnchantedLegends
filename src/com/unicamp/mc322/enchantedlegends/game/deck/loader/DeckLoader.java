@@ -1,13 +1,11 @@
 package com.unicamp.mc322.enchantedlegends.game.deck.loader;
 
-import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.deck.concrete.Deck;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.unicamp.mc322.enchantedlegends.game.filemanager.FileLoader;
+import com.unicamp.mc322.enchantedlegends.game.filemanager.converter.JsonConverterToDeck;
+import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 public class DeckLoader {
     private static DeckLoader instance;
@@ -23,27 +21,10 @@ public class DeckLoader {
         return instance;
     }
 
-    public Deck createDeck(String path) {
-        String deckName = "";
-        Map<Integer, Card> deckCards = new HashMap<>();
-        JSONParser parser = new JSONParser();
+    public Deck createDeck(String path) throws ParseException, IOException {
+        JsonConverterToDeck jsonConverterToDeck = new JsonConverterToDeck();
+        FileLoader fileLoader = FileLoader.getInstance();
 
-        try {
-            JSONObject jsonFIile = (JSONObject) parser.parse(new FileReader(path));
-
-            /*JSONArray cards = (JSONArray) jsonFIile.get("cards");
-
-            for (Object card : cards) {
-                JSONObject cardObj = (JSONObject) card;
-                createCard(cardObj);
-
-                System.out.println("\n");
-            }*/
-        }
-        catch (Exception e) {
-            System.out.println("Could not find your deck: " + e.getMessage());
-        }
-
-        return new Deck(deckName, deckCards);
+        return jsonConverterToDeck.getDeck(fileLoader.loadFile(path));
     }
 }
