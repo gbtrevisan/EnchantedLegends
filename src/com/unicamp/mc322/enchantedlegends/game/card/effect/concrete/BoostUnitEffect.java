@@ -14,7 +14,7 @@ public class BoostUnitEffect extends Effect {
         super(CardEvent.ACTIVATE);
 
         if (damage <= 0 || health <= 0) {
-            throw new EffectException("BoostAllUnitsEffect damage and health should be a positive number");
+            throw new EffectException("BoostAllUnitsEffect damage and health must be a positive number");
         }
 
         this.damage = damage;
