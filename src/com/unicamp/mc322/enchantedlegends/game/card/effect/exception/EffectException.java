@@ -1,6 +1,6 @@
 package com.unicamp.mc322.enchantedlegends.game.card.effect.exception;
 
-public class EffectException extends RuntimeException {
+public class EffectException extends IllegalArgumentException {
     public EffectException() {
         super();
     }
