@@ -1,19 +1,21 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion;
 
+import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.ChampionUpgrade;
-import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
 
 import java.util.List;
 import java.util.StringJoiner;
 
 public abstract class Champion extends Follower {
+
     private int levelUpPoints;
     private boolean alreadyPassedLevel;
     private final List<ChampionUpgrade> championUpgrades;
 
-    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Effect... effects) {
-        super(name, cost, damage, health, effects);
+    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
+        super(name, cost, damage, health, trait, effects);
 
         if (levelUpPoints <= 0) {
             throw new ChampionCreationException("Points to pass a level must be greater than zero!");
@@ -27,10 +29,6 @@ public abstract class Champion extends Follower {
 
         this.championUpgrades = championUpgrades;
         this.alreadyPassedLevel = false;
-    }
-
-    public void addEffect(Effect effect) {
-        this.effects.add(effect);
     }
 
     protected void decreaseLevelUpPoints() {
@@ -62,8 +60,8 @@ public abstract class Champion extends Follower {
     public String toString() {
         return new StringJoiner(", ", Champion.class.getSimpleName() + "[", "]")
                 .add(super.toString())
-                .add("damage=" + damage)
-                .add("health=" + health)
+                .add(attack.toString())
+                .add(defense.toString())
                 .add("upgrade=" + alreadyPassedLevel)
                 .toString();
     }

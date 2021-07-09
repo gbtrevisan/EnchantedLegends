@@ -1,8 +1,8 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades;
 
-import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
+import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
-import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
 
 public class MagicUpgrade implements ChampionUpgrade {
     private final Effect effect;
