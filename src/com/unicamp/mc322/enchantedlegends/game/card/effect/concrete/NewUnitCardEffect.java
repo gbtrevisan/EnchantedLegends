@@ -13,7 +13,7 @@ public class NewUnitCardEffect extends Effect {
         super(CardEvent.ENEMY_DESTROYED);
 
         if (cardName == null) {
-            throw new EffectException("NewUnitCardEffect cardName should not be null");
+            throw new EffectException("NewUnitCardEffect cardName must not be null");
         }
 
         this.cardName = cardName;
