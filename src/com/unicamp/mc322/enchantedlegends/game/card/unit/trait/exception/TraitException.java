@@ -1,6 +1,6 @@
-package com.unicamp.mc322.enchantedlegends.game.card.trait;
+package com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception;
 
-public class TraitException extends Exception {
+public class TraitException extends RuntimeException {
     public TraitException() {
     }
 
