@@ -1,22 +1,20 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
+import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
-import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
-import com.unicamp.mc322.enchantedlegends.game.card.trait.TraitException;
-import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
+    protected Attack attack;
+    protected Defense defense;
     private int initialHealth;
-    protected int damage;
-    protected int health;
-    private List<Trait> traits;
 
     public Follower() {
     }
@@ -32,18 +30,17 @@ public class Follower extends Card {
             throw new FollowerCreationException("Follower's health cannot be negative!");
         }
 
-        this.damage = damage;
-        this.health = this.initialHealth = health;
-        this.traits = new ArrayList<>();
-        this.traits.add(trait);
+        attack = new Attack(damage);
+        defense = new Defense(health);
+        super.addEventListener(trait);
     }
 
     public void addTrait(Trait trait) {
-        this.traits.add(trait);
+        super.addEventListener(trait);
     }
 
-    public List<Trait> getTraits() {
-        return traits;
+    public void addEffect(Effect effect) {
+        super.addEventListener(effect);
     }
 
     @Override
@@ -52,93 +49,72 @@ public class Follower extends Card {
         this.evoke();
     }
 
-    public boolean dontHasTrait(Trait trait) {
-        return !this.traits.contains(trait);
-    }
-
-    public boolean validateCombat(Follower enemy) {
-        try {
-            for(Trait trait: traits) {
-                trait.applyIfApplicable(this, enemy);
-            }
-
-            return true;
-        } catch (TraitException ex) {
-            return false;
-        }
-    }
-
     public void combat(Follower enemy) throws TraitException {
-        for (Trait trait : traits) {
-            trait.applyIfApplicable(this, enemy);
+        super.updateEventManager(CardEvent.COMBAT);
+        enemy.loseHealth(this.attack.causeDamage());
+        this.loseHealth(enemy.attack.causeDamage());
+
+        if (enemy.isDead()) {
+            super.updateEventManager(CardEvent.ENEMY_DESTROYED);
         }
 
-        enemy.loseHealth(this.damage);
-        this.loseHealth(enemy.damage);
-
-        for (Trait trait : traits) {
-            trait.applyIfApplicable(this, enemy);
+        if (this.isDead()) {
+            super.updateEventManager(CardEvent.BE_DESTROYED);
         }
     }
 
     public void attackNexus(Nexus enemyNexus) {
-        enemyNexus.receiveDamage(this.damage);
+        enemyNexus.receiveDamage(this.attack.causeDamage());
     }
 
     public void loseDamage(int amount) {
-        checkAmount(amount);
-        this.damage = Math.min(damage - amount, 0);
+        this.attack.loseDamage(amount);
     }
 
     public void increaseDamage(int amount) {
-        checkAmount(amount);
-        this.damage += amount;
+        this.attack.increaseDamage(amount);
+    }
+
+    public void annulAttack() {
+        attack.annulDamage();
     }
 
     public void loseHealth(int amount) {
-        checkAmount(amount);
-        this.health = Math.min(health - amount, 0);
+        defense.loseHealth(amount);
     }
 
     public void increaseHealth(int amount) {
-        checkAmount(amount);
-        this.health += amount;
+        defense.healHealth(amount);
     }
 
     public boolean isDead() {
-        return this.health == 0;
+        return defense.isDead();
     }
 
-    public void buff(int extraDamage, int extraHealth) {
-        checkAmount(extraDamage);
-        checkAmount(extraHealth);
-
-        this.damage += extraDamage;
-        this.health += extraHealth;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    private void checkAmount(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("The amount must not be negative!");
-        }
+    public void buff(int damage, int health) {
+        this.attack.increaseDamage(damage);
+        this.defense.healHealth(health);
     }
 
     private void evoke() {
-        GameState.getInstance().getSelf().addToEvokedUnits(this);
+        GameState.getInstance().getSelf().evokeUnit(this);
+    }
+
+    public void gainBarrier() {
+        defense.activateBarrier();
+    }
+
+    public int getDamage() {
+        return attack.getDamage();
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", Follower.class.getSimpleName() + "[", "]")
                 .add(super.toString())
-                .add("damage=" + damage)
-                .add("health=" + health)
                 .add("initialHealth=" + initialHealth)
-                .add("traits=" + traits)
+                .add(attack.toString())
+                .add(defense.toString())
                 .toString();
     }
 }

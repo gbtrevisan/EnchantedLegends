@@ -1,19 +1,21 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion;
 
-import com.unicamp.mc322.enchantedlegends.game.card.trait.Trait;
+import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.ChampionUpgrade;
-import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
 
 import java.util.List;
 import java.util.StringJoiner;
 
 public abstract class Champion extends Follower {
+
     private int levelUpPoints;
     private boolean alreadyPassedLevel;
     private List<ChampionUpgrade> upgrades;
 
-    public Champion(){}
+    public Champion() {
+    }
 
     public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> upgrades, Trait trait, Effect... effects) {
         super(name, cost, damage, health, trait, effects);
@@ -30,10 +32,6 @@ public abstract class Champion extends Follower {
 
         this.upgrades = upgrades;
         this.alreadyPassedLevel = false;
-    }
-
-    public void addEffect(Effect effect) {
-        this.effects.add(effect);
     }
 
     protected void decreaseLevelUpPoints() {
@@ -68,6 +66,8 @@ public abstract class Champion extends Follower {
                 .add("levelUpPoints=" + levelUpPoints)
                 .add("alreadyPassedLevel=" + alreadyPassedLevel)
                 .add("upgrades=" + upgrades)
+                .add(attack.toString())
+                .add(defense.toString())
                 .toString();
     }
 }

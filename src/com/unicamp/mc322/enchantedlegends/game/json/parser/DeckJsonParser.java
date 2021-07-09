@@ -20,7 +20,7 @@ public class DeckJsonParser extends JsonParser {
 
         List<Card> cards = new ArrayList<>();
         for (Object o : cardsJson) {
-            cards.add(GameCards.getInstance().getCard((String) o));
+            cards.add(GameCards.getInstance().getByName((String) o));
         }
 
         return new Deck(name, cards);

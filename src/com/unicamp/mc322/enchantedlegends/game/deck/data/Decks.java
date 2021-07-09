@@ -16,8 +16,8 @@ public class Decks {
     private static Decks instance;
     private final DeckLoader deckLoader;
     private final List<Deck>  decks;
-    private final static String RELATIVE_PATH_JSON = "src/com/unicamp/mc322/enchantedlegends/game/deck/data/";
-    private final static String DECK_FILE = "Deck.json";
+    private final static String RELATIVE_PATH_JSON = "src/com/unicamp/mc322/enchantedlegends/game/deck/decksdata/";
+    private final static String DECK_FILE = "_deck.json";
 
     private Decks() {
         this.decks = new ArrayList<>();

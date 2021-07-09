@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class GameCards {
     private static GameCards instance;
-    private Map<String, Card> gameCards;
+    private final Map<String, Card> gameCards;
 
     private GameCards() {
         this.gameCards = new HashMap<>();
@@ -25,7 +25,7 @@ public class GameCards {
         this.gameCards.put(card.getName(), card);
     }
 
-    public Card getCard(String cardName) {
+    public Card getByName(String cardName) {
         if (!this.gameCards.containsKey(cardName)) {
             throw new GameCardException("Could not find any card with this name (name = " + cardName + ")");
         }
