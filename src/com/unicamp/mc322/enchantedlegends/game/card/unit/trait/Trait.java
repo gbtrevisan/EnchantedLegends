@@ -10,7 +10,7 @@ public abstract class Trait implements EventListener {
 
     public Trait(CardEvent event) {
         if (event == null) {
-            throw new TraitException("Trait event should not be null");
+            throw new TraitException("Trait event must not be null");
         }
 
         this.event = event;
