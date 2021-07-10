@@ -14,8 +14,20 @@ public class CauseDamageToLevelUpChampion extends Champion {
     public CauseDamageToLevelUpChampion() {
     }
 
-    public CauseDamageToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
-        super(name, cost, damage, health, levelUpPoints, championUpgrades, trait, effects);
+    public CauseDamageToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        super(name, cost, damage, health, levelUpPoints, upgrades);
+    }
+
+    public CauseDamageToLevelUpChampion(String name, int cost, int damage, int health, Trait trait, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        super(name, cost, damage, health, trait, levelUpPoints, upgrades);
+    }
+
+    public CauseDamageToLevelUpChampion(String name, int cost, int damage, int health, List<Effect> effects, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        super(name, cost, damage, health, effects, levelUpPoints, upgrades);
+    }
+
+    public CauseDamageToLevelUpChampion(String name, int cost, int damage, int health, Trait trait, List<Effect> effects, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        super(name, cost, damage, health, trait, effects, levelUpPoints, upgrades);
     }
 
     @Override

@@ -1,20 +1,19 @@
-package com.unicamp.mc322.enchantedlegends.game.json.parser;
+package com.unicamp.mc322.enchantedlegends.game.loader.deck;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
-import com.unicamp.mc322.enchantedlegends.game.cards.GameCards;
-import com.unicamp.mc322.enchantedlegends.game.deck.concrete.Deck;
+import com.unicamp.mc322.enchantedlegends.game.loader.cards.GameCards;
+import com.unicamp.mc322.enchantedlegends.game.loader.JsonLoader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeckJsonParser extends JsonParser {
+public class DeckLoader extends JsonLoader {
 
     @Override
-    public Deck parseToObject(String json) throws ParseException {
-        JSONObject deckJson = (JSONObject) parser.parse(json);
+    public Deck parseToObject(Object json) {
+        JSONObject deckJson = (JSONObject) json;
         String name = (String) deckJson.get("name");
         JSONArray cardsJson = (JSONArray) deckJson.get("cards");
 

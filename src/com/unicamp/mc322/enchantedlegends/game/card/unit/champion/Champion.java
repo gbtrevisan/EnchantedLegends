@@ -17,7 +17,19 @@ public abstract class Champion extends Follower {
     public Champion() {
     }
 
-    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> upgrades, Trait trait, Effect... effects) {
+    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        this(name, cost, damage, health, null, null, levelUpPoints, upgrades);
+    }
+
+    public Champion(String name, int cost, int damage, int health, Trait trait, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        this(name, cost, damage, health, trait, null, levelUpPoints, upgrades);
+    }
+
+    public Champion(String name, int cost, int damage, int health, List<Effect> effects, int levelUpPoints, List<ChampionUpgrade> upgrades) {
+        this(name, cost, damage, health, null, effects, levelUpPoints, upgrades);
+    }
+
+    public Champion(String name, int cost, int damage, int health, Trait trait, List<Effect> effects, int levelUpPoints, List<ChampionUpgrade> upgrades) {
         super(name, cost, damage, health, trait, effects);
 
         if (levelUpPoints <= 0) {
@@ -66,8 +78,6 @@ public abstract class Champion extends Follower {
                 .add("levelUpPoints=" + levelUpPoints)
                 .add("alreadyPassedLevel=" + alreadyPassedLevel)
                 .add("upgrades=" + upgrades)
-                .add(attack.toString())
-                .add(defense.toString())
                 .toString();
     }
 }

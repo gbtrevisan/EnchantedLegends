@@ -9,17 +9,29 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitEx
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
     protected Attack attack;
     protected Defense defense;
-    private int initialHealth;
 
     public Follower() {
     }
 
-    public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
+    public Follower(String name, int cost, int damage, int health) {
+        this(name, cost, damage, health, null, null);
+    }
+
+    public Follower(String name, int cost, int damage, int health, Trait trait) {
+        this(name, cost, damage, health, trait, null);
+    }
+
+    public Follower(String name, int cost, int damage, int health, List<Effect> effects) {
+        this(name, cost, damage, health, null, effects);
+    }
+
+    public Follower(String name, int cost, int damage, int health, Trait trait, List<Effect> effects) {
         super(name, cost, effects);
 
         if (damage < 0) {
@@ -108,13 +120,16 @@ public class Follower extends Card {
         return attack.getDamage();
     }
 
+    public int getHealth() {
+        return defense.getHealth();
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Follower.class.getSimpleName() + "[", "]")
                 .add(super.toString())
-                .add("initialHealth=" + initialHealth)
-                .add(attack.toString())
-                .add(defense.toString())
+                .add(attack == null ? "" : attack.toString())
+                .add(defense == null ? "" : defense.toString())
                 .toString();
     }
 }

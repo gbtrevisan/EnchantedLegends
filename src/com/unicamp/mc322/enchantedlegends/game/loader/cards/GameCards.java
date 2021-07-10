@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.cards;
+package com.unicamp.mc322.enchantedlegends.game.loader.cards;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 
@@ -27,7 +27,7 @@ public class GameCards {
 
     public Card getByName(String cardName) {
         if (!this.gameCards.containsKey(cardName)) {
-            throw new GameCardException("Could not find any card with this name (name = " + cardName + ")");
+            throw new GameCardsException("Could not find any card with this name (name = " + cardName + ")");
         }
 
         return this.gameCards.get(cardName);

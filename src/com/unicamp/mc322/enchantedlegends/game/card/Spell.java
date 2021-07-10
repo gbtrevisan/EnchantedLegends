@@ -2,14 +2,19 @@ package com.unicamp.mc322.enchantedlegends.game.card;
 
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
-import com.unicamp.mc322.enchantedlegends.game.card.exception.SpellCreationException;
+
+import java.util.List;
 
 public class Spell extends Card {
 
     public Spell() {
     }
 
-    public Spell(String name, int cost, Effect... effects) {
+    public Spell(String name, int cost) {
+        this(name, cost, null);
+    }
+
+    public Spell(String name, int cost, List<Effect> effects) {
         super(name, cost, effects);
 
         for (Effect effect : effects) {
