@@ -162,7 +162,12 @@ public abstract class Player implements GameObject {
     }
 
     public void attack(Player enemy) {
+      
+    }
 
+    private void improveUnitStatus(Follower unit, int damage, int health) {
+        unit.increaseDamage(damage);
+        unit.increaseHealth(health);
     }
 
     private void defend() {
