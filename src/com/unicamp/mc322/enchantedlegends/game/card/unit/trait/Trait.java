@@ -6,7 +6,10 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitEx
 
 public abstract class Trait implements EventListener {
 
-    private final CardEvent event;
+    private CardEvent event;
+
+    public Trait() {
+    }
 
     public Trait(CardEvent event) {
         if (event == null) {
@@ -24,5 +27,4 @@ public abstract class Trait implements EventListener {
     }
 
     protected abstract void apply();
-
 }

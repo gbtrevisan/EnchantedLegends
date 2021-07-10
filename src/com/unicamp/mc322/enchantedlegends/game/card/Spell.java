@@ -5,6 +5,10 @@ import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.card.exception.SpellCreationException;
 
 public class Spell extends Card {
+
+    public Spell() {
+    }
+
     public Spell(String name, int cost, Effect... effects) {
         super(name, cost, effects);
 

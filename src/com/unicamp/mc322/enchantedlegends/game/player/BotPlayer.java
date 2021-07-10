@@ -7,12 +7,26 @@ public class BotPlayer extends Player {
     }
 
     @Override
-    public void chooseCard() {
-
+    public int choosePositonToEvokeUnit() {
+        return this.playerCards.getRandomEvokePosition();
     }
 
     @Override
-    public void chooseEnemyCard() {
+    public int chooseHandCard() {
+        return this.playerCards.randomIndex(this.playerCards.getHandSize());
+    }
 
+    @Override
+    public int chooseCard() {
+        return this.playerCards.randomIndex(this.playerCards.getNumberOfEvokedUnits());
+    }
+
+    @Override
+    public int chooseEnemyCard(Player enemey) {
+        return enemey.getPlayerCards().randomIndex(enemey.getPlayerCards().getNumberOfEvokedUnits());
+    }
+
+    @Override
+    public void chooseDeck() {
     }
 }

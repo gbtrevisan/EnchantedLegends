@@ -1,0 +1,18 @@
+package com.unicamp.mc322.enchantedlegends.game;
+
+import com.unicamp.mc322.enchantedlegends.game.card.Card;
+import com.unicamp.mc322.enchantedlegends.game.card.PlayerCards;
+import com.unicamp.mc322.enchantedlegends.game.deck.concrete.Deck;
+import com.unicamp.mc322.enchantedlegends.game.player.Player;
+
+public interface GameObjectVisitor {
+
+    void visit(Player player);
+
+    void visit(PlayerCards cards);
+
+    void visit(Card card);
+
+    void visit(Deck deck);
+
+}

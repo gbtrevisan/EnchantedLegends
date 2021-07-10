@@ -12,12 +12,12 @@ public abstract class Champion extends Follower {
 
     private int levelUpPoints;
     private boolean alreadyPassedLevel;
-    private List<ChampionUpgrade> championUpgrades;
+    private List<ChampionUpgrade> upgrades;
 
     public Champion() {
     }
 
-    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
+    public Champion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> upgrades, Trait trait, Effect... effects) {
         super(name, cost, damage, health, trait, effects);
 
         if (levelUpPoints <= 0) {
@@ -26,11 +26,11 @@ public abstract class Champion extends Follower {
 
         this.levelUpPoints = levelUpPoints;
 
-        if (championUpgrades.isEmpty()) {
+        if (upgrades.isEmpty()) {
             throw new ChampionCreationException("There must be at least one upgrade!");
         }
 
-        this.championUpgrades = championUpgrades;
+        this.upgrades = upgrades;
         this.alreadyPassedLevel = false;
     }
 
@@ -56,16 +56,18 @@ public abstract class Champion extends Follower {
     }
 
     private void upgradeLevel() {
-        this.championUpgrades.forEach(championUpgrade -> championUpgrade.upgradeLevel(this));
+        this.upgrades.forEach(championUpgrade -> championUpgrade.upgradeLevel(this));
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", Champion.class.getSimpleName() + "[", "]")
                 .add(super.toString())
+                .add("levelUpPoints=" + levelUpPoints)
+                .add("alreadyPassedLevel=" + alreadyPassedLevel)
+                .add("upgrades=" + upgrades)
                 .add(attack.toString())
                 .add(defense.toString())
-                .add("upgrade=" + alreadyPassedLevel)
                 .toString();
     }
 }

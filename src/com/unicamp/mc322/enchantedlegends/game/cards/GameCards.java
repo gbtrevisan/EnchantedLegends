@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class GameCards {
     private static GameCards instance;
-    private Map<String, Card> gameCards;
+    private final Map<String, Card> gameCards;
 
     private GameCards() {
         this.gameCards = new HashMap<>();
@@ -21,8 +21,8 @@ public class GameCards {
         return instance;
     }
 
-    public void addGameCard(Card gameCard) {
-        this.gameCards.put(gameCard.getName(), gameCard);
+    public void addCard(Card card) {
+        this.gameCards.put(card.getName(), card);
     }
 
     public Card getByName(String cardName) {

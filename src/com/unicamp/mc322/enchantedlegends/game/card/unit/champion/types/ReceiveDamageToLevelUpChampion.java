@@ -9,12 +9,12 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.Champ
 
 import java.util.List;
 
-public class ReciveDamageToLevelUpChampion extends Champion {
+public class ReceiveDamageToLevelUpChampion extends Champion {
 
-    public ReciveDamageToLevelUpChampion() {
+    public ReceiveDamageToLevelUpChampion() {
     }
 
-    public ReciveDamageToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
+    public ReceiveDamageToLevelUpChampion(String name, int cost, int damage, int health, int levelUpPoints, List<ChampionUpgrade> championUpgrades, Trait trait, Effect... effects) {
         super(name, cost, damage, health, levelUpPoints, championUpgrades, trait, effects);
     }
 

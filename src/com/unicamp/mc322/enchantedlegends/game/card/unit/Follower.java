@@ -12,9 +12,16 @@ import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2d443fc948d6bb8ce64536d1ae12778f16be6c2
     protected Attack attack;
     protected Defense defense;
+    private int initialHealth;
+
+    public Follower() {
+    }
 
     public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
         super(name, cost, effects);
@@ -32,11 +39,12 @@ public class Follower extends Card {
         super.addEventListener(trait);
     }
 
-    public Follower() {
-    }
-
     public void addTrait(Trait trait) {
         super.addEventListener(trait);
+    }
+
+    public void addEffect(Effect effect) {
+        super.addEventListener(effect);
     }
 
     @Override
@@ -83,6 +91,10 @@ public class Follower extends Card {
         defense.healHealth(amount);
     }
 
+    public void healFullHealth() {
+        defense.healFullHealth();
+    }
+
     public boolean isDead() {
         return defense.isDead();
     }
@@ -108,6 +120,7 @@ public class Follower extends Card {
     public String toString() {
         return new StringJoiner(", ", Follower.class.getSimpleName() + "[", "]")
                 .add(super.toString())
+                .add("initialHealth=" + initialHealth)
                 .add(attack.toString())
                 .add(defense.toString())
                 .toString();

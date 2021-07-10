@@ -21,7 +21,7 @@ public class AttackNexusEffect extends Effect {
 
     @Override
     protected void apply() {
-        GameState.getInstance().getSelf().attackEnemyNexus(amount);
+        GameState.getInstance().getSelf().attackEnemyNexus(GameState.getInstance().getEnemy(), amount);
     }
 
 }

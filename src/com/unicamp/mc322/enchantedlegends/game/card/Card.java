@@ -1,5 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
+import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.card.event.EventListener;
@@ -11,14 +13,11 @@ import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientM
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public abstract class Card {
+public abstract class Card implements GameObject {
 
     protected int cost;
-    private String name;
-    private EventManager eventManager;
-
-    public Card() {
-    }
+    private final String name;
+    private final EventManager eventManager;
 
     public Card(String name, int cost, Effect... effects) {
         Objects.requireNonNull(name, "Card name must not be null");
@@ -35,6 +34,10 @@ public abstract class Card {
         for (Effect effect : effects) {
             eventManager.subscribe(effect);
         }
+    }
+
+    public String getName() {
+        return name;
     }
 
     protected void updateEventManager(CardEvent event) {
@@ -60,5 +63,10 @@ public abstract class Card {
                 .add("name='" + name + "'")
                 .add("cost=" + cost)
                 .toString();
+    }
+
+    @Override
+    public void accept(GameObjectVisitor gameObjectVisitor) {
+
     }
 }
