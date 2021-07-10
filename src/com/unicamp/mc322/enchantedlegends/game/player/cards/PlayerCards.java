@@ -1,5 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.player.cards;
 
+import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.cards.GameCards;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PlayerCards {
+public class PlayerCards implements GameObject {
 
     protected final List<Card> playerUnseenCards;
     protected final List<Card> playerHand;
@@ -112,5 +114,10 @@ public class PlayerCards {
     private void restartPlayerCards() {
         this.playerUnseenCards.addAll(this.deadUnits);
         this.deadUnits.clear();
+    }
+
+    @Override
+    public void accept(GameObjectVisitor visitor) {
+
     }
 }

@@ -12,6 +12,7 @@ import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
+
     protected Attack attack;
     protected Defense defense;
     private int initialHealth;

@@ -1,18 +1,27 @@
 package com.unicamp.mc322.enchantedlegends.game.player;
 
+import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.player.cards.PlayerCards;
 
-public abstract class Player {
+import java.util.Objects;
 
+public abstract class Player implements GameObject {
+
+    private final String name;
     protected final Mana mana;
     protected final Nexus nexus;
     protected PlayerCards playerCards;
     protected boolean onAttack;
+    private boolean chosenToAttack;
 
-    public Player() {
+    public Player(String name) {
+        Objects.requireNonNull(name, "Player name must not be null");
+
+        this.name = name;
         this.mana = new Mana();
         this.nexus = new Nexus();
         this.playerCards = new PlayerCards();
@@ -25,7 +34,7 @@ public abstract class Player {
 
     public abstract int chooseHandCard();
 
-    public abstract int chooseEnemyCard(Player enemey);
+    public abstract int chooseEnemyCard(Player enemy);
 
     public abstract void chooseDeck();
 
@@ -129,5 +138,39 @@ public abstract class Player {
         int selectedEnemyUnit = chooseEnemyCard(enemy);
 
         return enemy.playerCards.getSelectedEvokedUnit(selectedEnemyUnit);
+    }
+
+    public boolean isAlive() {
+        return !nexus.isDead();
+    }
+
+    @Override
+    public void accept(GameObjectVisitor gameObjectVisitor) {
+
+    }
+
+    public void restoreMana(int value) {
+        mana.restore(value);
+    }
+
+    public void startTurn() {
+
+    }
+
+    public boolean chosenToAttack() {
+        return chosenToAttack;
+    }
+
+    public void attack(Player enemy) {
+      
+    }
+
+    private void improveUnitStatus(Follower unit, int damage, int health) {
+        unit.increaseDamage(damage);
+        unit.increaseHealth(health);
+    }
+
+    private void defend() {
+
     }
 }

@@ -1,6 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.deck.concrete;
 
 import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.deck.DeckException;
 
@@ -20,6 +21,25 @@ public class Deck implements GameObject {
             throw new DeckException("Your deck cannot be over " + MAX_CARDS + " cards");
         }
 
+        this.deckCards.put(name, card);
+    }
+
+    public Card getCard(String cardName) {
+        if (!this.deckCards.containsKey(cardName)) {
+            throw new DeckException("Could not find the card " + cardName);
+        }
+
+        return this.deckCards.get(cardName);
+    }
+
+    public List<Card> getAllCards() {
+        return new ArrayList<>(this.deckCards.values());
+
         this.deckCards.add(card);
+    }
+
+    @Override
+    public void accept(GameObjectVisitor visitor) {
+      
     }
 }
