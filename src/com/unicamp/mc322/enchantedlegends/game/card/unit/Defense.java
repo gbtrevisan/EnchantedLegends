@@ -39,6 +39,10 @@ public class Defense {
         return currentHealth == 0;
     }
 
+    void healFullHealth() {
+        currentHealth = maxHealth;
+    }
+
     @Override
     public String toString() {
         return "maxHealth= " + maxHealth + "\n" + "currentHealth= " + currentHealth;
