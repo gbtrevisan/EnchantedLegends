@@ -21,6 +21,8 @@ public abstract class Player {
 
     public abstract int chooseCard();
 
+    public abstract int choosePositonToEvokeUnit();
+
     public abstract int chooseHandCard();
 
     public abstract int chooseEnemyCard(Player enemey);
@@ -35,8 +37,14 @@ public abstract class Player {
         onAttack = false;
     }
 
-    public void recieveInitialHand() {
+    public void receiveInitialHand() {
         this.playerCards.getInitialHand();
+    }
+
+    public void evokeUnit(Follower follower) {
+        int positionToEvoke = choosePositonToEvokeUnit();
+
+        this.playerCards.evokeUnit(positionToEvoke, follower);
     }
 
     public void selectHandCard() {
@@ -44,10 +52,6 @@ public abstract class Player {
         Card handCard = this.playerCards.getSelectedHandCard(handCardIndex);
 
         handCard.activate(this.mana);
-    }
-
-    public void evokeUnit(Follower follower) {
-        this.playerCards.evokeUnit(follower);
     }
 
     public void boostAllUnits(int damage, int health) {

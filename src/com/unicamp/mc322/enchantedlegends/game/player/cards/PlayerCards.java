@@ -2,85 +2,75 @@ package com.unicamp.mc322.enchantedlegends.game.player.cards;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
+import com.unicamp.mc322.enchantedlegends.game.cards.GameCards;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PlayerCards {
-    private final List<Card> playerDeck;
-    private final List<Card> playerUnseenCard;
-    private final List<Card> playerHand;
-    private final List<Card> deadUnits;
-    private final List<Follower> evokedUnits;
-    private final static int INITIAL_HAND = 4;
+
+    protected final List<Card> playerUnseenCards;
+    protected final List<Card> playerHand;
+    protected final EvokedUnits evokedUnits;
+    protected final List<Card> deadUnits;
+    protected final static int INITIAL_HAND = 4;
 
     public PlayerCards() {
-        this.playerDeck = new ArrayList<>();
-        this.playerUnseenCard = new ArrayList<>();
+        this.evokedUnits = new EvokedUnits();
+        this.playerUnseenCards = new ArrayList<>();
         this.playerHand = new ArrayList<>();
-        this.evokedUnits = new ArrayList<>();
         this.deadUnits = new ArrayList<>();
     }
 
     public List<Follower> getEvokedUnits() {
-        return evokedUnits;
+        return this.evokedUnits.getEvokedUnits();
     }
 
     public void getRandomCard() {
-        Card randomCard = this.playerUnseenCard.get(randomIndex(this.playerUnseenCard.size()));
+        Card randomCard = this.playerUnseenCards.get(randomIndex(this.playerUnseenCards.size()));
         this.playerHand.add(randomCard);
-        this.playerUnseenCard.remove(randomCard);
+        this.playerUnseenCards.remove(randomCard);
         checkCardsSituation();
     }
 
     public void getInitialHand() {
-        for (int x = 0; x < INITIAL_HAND && !this.playerUnseenCard.isEmpty(); x++) {
+        for (int i = 0; i < INITIAL_HAND && !this.playerUnseenCards.isEmpty(); i++) {
             getRandomCard();
         }
     }
 
-    public void changeInitialHand(int cardsToChange) {
-        if (cardsToChange < 0 || cardsToChange > this.playerHand.size()) {
+    public void changeInitialHand(List<Integer> cardsToChange) {
+        if (cardsToChange.size() > this.playerHand.size()) {
             throw new PlayerCardException("You can only trade from 0 to " + this.playerHand.size() + " cards");
         }
 
         List<Card> removedHandCards = new ArrayList<>(), newHandCards = new ArrayList<>();
 
-        for (int x = 0; x < INITIAL_HAND && !this.playerUnseenCard.isEmpty(); x++) {
-            Card randomCardHand = this.playerHand.get(randomIndex(this.playerHand.size()));
-            Card newCard = this.playerUnseenCard.get(randomIndex(this.playerUnseenCard.size()));
-            removedHandCards.add(randomCardHand);
+        for (int i = 0; i < cardsToChange.size() && !this.playerUnseenCards.isEmpty(); i++) {
+            removedHandCards.add(this.playerHand.get(cardsToChange.get(i)));
+            Card newCard = this.playerUnseenCards.get(randomIndex(this.playerUnseenCards.size()));
             newHandCards.add(newCard);
 
-            this.playerHand.remove(randomCardHand);
-            this.playerUnseenCard.remove(newCard);
+            this.playerHand.remove(cardsToChange.get(i));
+            this.playerUnseenCards.remove(newCard);
             checkCardsSituation();
         }
 
-        changeCardList(this.playerHand, newHandCards);
-        changeCardList(this.playerUnseenCard, removedHandCards);
+        this.playerHand.addAll(newHandCards);
+        this.playerUnseenCards.addAll(removedHandCards);
     }
 
-    public void evokeUnit(Follower followerEvoked) {
-        for (Card follower : this.playerHand) {
-            if (followerEvoked.getName().equalsIgnoreCase(follower.getName())) {
-                this.playerHand.remove(follower);
-                this.evokedUnits.add(followerEvoked);
-            }
-        }
+    public void evokeUnit(int indexToEvokeUnit, Follower followerEvoked) {
+        this.evokedUnits.evokeNewUnitAt(indexToEvokeUnit, followerEvoked);
     }
 
     public void gainDeckCard(String cardName) {
-        for (Card card : this.playerDeck) {
-            if (card.getName().equalsIgnoreCase(cardName)) {
-                this.playerHand.add(card);
-            }
-        }
+        this.playerHand.add(GameCards.getInstance().getByName(cardName));
     }
 
     public Card getSelectedHandCard(int cardIndex) {
-        if (isIndexValide(cardIndex, this.playerHand.size())) {
+        if (isIndexInvalid(cardIndex, this.playerHand.size())) {
             throw new PlayerCardException("The desired index " + cardIndex + " is invalid");
         }
 
@@ -88,11 +78,15 @@ public class PlayerCards {
     }
 
     public Follower getSelectedEvokedUnit(int cardIndex) {
-        if (isIndexValide(cardIndex, this.evokedUnits.size())) {
-            throw new PlayerCardException("The desired index " + cardIndex + " is invalid");
-        }
+        return this.evokedUnits.getSelectedEvokedUnit(cardIndex);
+    }
 
-        return this.evokedUnits.get(cardIndex - 1);
+    public int getHandSize() {
+        return this.playerHand.size();
+    }
+
+    public int getRandomEvokePosition() {
+        return randomIndex(this.evokedUnits.sizeOfEvokeArea());
     }
 
     public int randomIndex(int listSize) {
@@ -102,29 +96,21 @@ public class PlayerCards {
     }
 
     public int getNumberOfEvokedUnits() {
-        return this.evokedUnits.size();
+        return this.evokedUnits.getNumberOfEvokedUnits();
     }
 
-    public int getHandSize() {
-        return this.playerHand.size();
-    }
-
-    private void changeCardList(List<Card> listToChange, List<Card> listToAdd) {
-        listToChange.addAll(listToAdd);
-    }
-
-    private boolean isIndexValide(int index, int maxValue) {
-        return index >= 1 && index <= maxValue;
+    private boolean isIndexInvalid(int index, int maxValue) {
+        return index < 1 || index > maxValue;
     }
 
     private void checkCardsSituation() {
-        if (this.playerUnseenCard.isEmpty() && this.playerHand.isEmpty()) {
+        if (this.playerUnseenCards.isEmpty() && this.playerHand.isEmpty()) {
             restartPlayerCards();
         }
     }
 
     private void restartPlayerCards() {
-        this.playerUnseenCard.addAll(this.playerDeck);
+        this.playerUnseenCards.addAll(this.deadUnits);
         this.deadUnits.clear();
     }
 }

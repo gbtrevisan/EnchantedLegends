@@ -3,8 +3,14 @@ package com.unicamp.mc322.enchantedlegends.game.player.types;
 import com.unicamp.mc322.enchantedlegends.game.player.Player;
 
 public class BotPlayer extends Player {
+
     public BotPlayer() {
         super();
+    }
+
+    @Override
+    public int choosePositonToEvokeUnit() {
+        return this.playerCards.getRandomEvokePosition();
     }
 
     @Override
