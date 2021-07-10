@@ -31,9 +31,6 @@ public class Deck {
     }
 
     public List<Card> getAllCards() {
-        List<Card> allCards = new ArrayList<>();
-        allCards.addAll(this.deckCards.values());
-
-        return allCards;
+        return new ArrayList<>(this.deckCards.values());
     }
 }

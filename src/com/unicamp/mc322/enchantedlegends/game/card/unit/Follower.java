@@ -3,19 +3,16 @@ package com.unicamp.mc322.enchantedlegends.game.card.unit;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
-import com.unicamp.mc322.enchantedlegends.game.card.event.EventManager;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
 import com.unicamp.mc322.enchantedlegends.game.player.Nexus;
 
-import java.util.List;
 import java.util.StringJoiner;
 
 public class Follower extends Card {
-    private int initialHealth;
-    private List<Trait> traits;
+
     protected Attack attack;
     protected Defense defense;
 
