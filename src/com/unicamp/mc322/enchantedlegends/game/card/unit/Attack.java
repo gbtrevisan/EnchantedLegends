@@ -5,7 +5,6 @@ public class Attack {
     private final int damage;
     private int currentDamage;
 
-
     Attack(int damage) {
         if (damage < 0) {
             throw new IllegalArgumentException("Attack damage should be greater or equal to 0");
