@@ -49,12 +49,7 @@ public abstract class Player implements GameObject {
         PlayerActions playerAction = null;
 
         while (playerTurnContinue(playerAction)) {
-            if (this.onAttack) {
-                playerAction = chooseAction();
-            } else {
-                playerAction = chooseAction();
-            }
-
+            playerAction = chooseAction();
             definePlayerAction(playerAction);
         }
     }
