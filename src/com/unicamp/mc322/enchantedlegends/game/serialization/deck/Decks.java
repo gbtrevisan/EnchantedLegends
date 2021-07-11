@@ -1,9 +1,11 @@
 package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Decks {
-    private final static String DECKS_FILE = "decks.json";
     private static Decks instance;
     private final Map<String, Deck> decks;
 
@@ -25,5 +27,9 @@ public class Decks {
 
     public Deck getByName(String name) {
         return decks.get(name);
+    }
+
+    public List<String> getAllDeckNames() {
+        return new ArrayList<>(decks.keySet());
     }
 }

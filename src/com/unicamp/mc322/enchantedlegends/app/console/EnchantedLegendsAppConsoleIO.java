@@ -4,8 +4,13 @@ import com.unicamp.mc322.enchantedlegends.app.DeckOption;
 import com.unicamp.mc322.enchantedlegends.app.EnchantedLegendsAppIO;
 import com.unicamp.mc322.enchantedlegends.app.GameMode;
 import com.unicamp.mc322.enchantedlegends.app.MenuOption;
-import com.unicamp.mc322.enchantedlegends.game.deck.data.Decks;
+import com.unicamp.mc322.enchantedlegends.game.card.Card;
+import com.unicamp.mc322.enchantedlegends.game.player.Player;
+import com.unicamp.mc322.enchantedlegends.game.player.cards.PlayerCards;
+import com.unicamp.mc322.enchantedlegends.game.serialization.deck.Deck;
+import com.unicamp.mc322.enchantedlegends.game.serialization.deck.Decks;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class EnchantedLegendsAppConsoleIO implements EnchantedLegendsAppIO {
@@ -24,7 +29,7 @@ public class EnchantedLegendsAppConsoleIO implements EnchantedLegendsAppIO {
 
     @Override
     public void displayDeckMenu() {
-        System.out.println("[1] - LOOK DECKS\n[2] - UPDATE DECK\n[3] - CREATE NEW DECK");
+        System.out.println("[1] - LOOK DECK\n[2] - UPDATE DECK\n[3] - CREATE NEW DECK");
     }
 
     @Override
@@ -34,42 +39,46 @@ public class EnchantedLegendsAppConsoleIO implements EnchantedLegendsAppIO {
 
     @Override
     public void displayDecks() {
-        Decks.getInstance().showAllDeckNames();
+        List<String> decks = Decks.getInstance().getAllDeckNames();
+        for (String deckName: decks) {
+            System.out.println("- " + deckName);
+        }
     }
 
     @Override
     public void displayDeck(String name) {
-
+        Deck deck = Decks.getInstance().getByName(name);
+        this.visit(deck);
     }
 
     private int chooseOption() {
-        System.out.println("Type your option: ");
+        System.out.print("Type your option: ");
         return scanner.nextInt();
     }
 
     @Override
     public MenuOption chooseMenuOption() {
-        int option = chooseOption();
+        for (; ; ) {
+            int option = chooseOption();
 
-        if (option == 1) {
-            return MenuOption.PLAY;
-        } else if (option == 2) {
-            return MenuOption.DECKS;
-        } else {
-            return MenuOption.EXIT;
+            try {
+                return MenuOption.values()[option - 1];
+            } catch (IndexOutOfBoundsException ex) {
+                System.out.println("Invalid option! Please, retype.");
+            }
         }
     }
 
     @Override
     public GameMode chooseGameMode() {
-        int option = chooseOption();
+        for (; ; ) {
+            int option = chooseOption();
 
-        if (option == 1) {
-            return GameMode.MULTIPLAYER_LOCAL;
-        } else if (option == 2) {
-            return GameMode.SINGLE_PLAYER_LOCAL;
-        } else {
-            return GameMode.SPECTATOR;
+            try {
+                return GameMode.values()[option - 1];
+            } catch (IndexOutOfBoundsException ex) {
+                System.out.println("Invalid option! Please, retype.");
+            }
         }
     }
 
@@ -88,6 +97,26 @@ public class EnchantedLegendsAppConsoleIO implements EnchantedLegendsAppIO {
 
     String readInfo(String message) {
         System.out.println(message);
-        return scanner.nextLine();
+        return scanner.next();
+    }
+
+    @Override
+    public void visit(Player player) {
+
+    }
+
+    @Override
+    public void visit(PlayerCards cards) {
+
+    }
+
+    @Override
+    public void visit(Card card) {
+
+    }
+
+    @Override
+    public void visit(Deck deck) {
+        deck.accept(this);
     }
 }

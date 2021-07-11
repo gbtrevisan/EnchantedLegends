@@ -4,6 +4,10 @@ import com.unicamp.mc322.enchantedlegends.app.*;
 import com.unicamp.mc322.enchantedlegends.game.ConsoleGameEngine;
 import com.unicamp.mc322.enchantedlegends.game.GameEngine;
 import com.unicamp.mc322.enchantedlegends.game.player.Player;
+import com.unicamp.mc322.enchantedlegends.game.player.types.BotPlayer;
+import com.unicamp.mc322.enchantedlegends.game.player.types.HumanPlayer;
+import com.unicamp.mc322.enchantedlegends.game.serialization.cards.AllCardsLoader;
+import com.unicamp.mc322.enchantedlegends.game.serialization.deck.AllDecksLoader;
 
 public class EnchantedLegendsConsoleApp implements EnchantedLegendsApp {
 
@@ -11,6 +15,8 @@ public class EnchantedLegendsConsoleApp implements EnchantedLegendsApp {
 
     @Override
     public void start() {
+        AllCardsLoader.getInstance().createAllCardsByDefault();
+        AllDecksLoader.getInstance().createAllDecksByDefault();
         io.displayWelcomeMessage();
         io.displayMenu();
         MenuOption menuOption;
@@ -31,7 +37,7 @@ public class EnchantedLegendsConsoleApp implements EnchantedLegendsApp {
                } else if (deckOption == DeckOption.LOOK_DECK) {
                    io.displayDeck(io.readInfo("Select deck: "));
                } else if (deckOption == DeckOption.UPDATE_DECK) {
-                   updateDeck();
+                   updateDeck(io.readInfo("Select deck: "));
                }
            }
         } while (menuOption != MenuOption.EXIT);
@@ -44,26 +50,28 @@ public class EnchantedLegendsConsoleApp implements EnchantedLegendsApp {
             game = new ConsoleGameEngine(buildHumanPlayer(), buildHumanPlayer());
         } else if (gameMode == GameMode.SINGLE_PLAYER_LOCAL) {
             game = new ConsoleGameEngine(buildHumanPlayer(), buildBotPlayer());
-        } else {
+        } else if (gameMode == GameMode.SPECTATOR) {
             game = new ConsoleGameEngine(buildBotPlayer(), buildBotPlayer());
+        } else {
+            throw new UnsupportedOperationException("GameMode not implemented");
         }
 
         game.run();
     }
 
     private Player buildBotPlayer() {
-        return null;
+        return new BotPlayer();
     }
 
     private Player buildHumanPlayer() {
-        return null;
+        return new HumanPlayer(io.readInfo("Choose your nick to play: "));
     }
 
     private void createNewDeck() {
         
     }
 
-    private void updateDeck() {
+    private void updateDeck(String deckName) {
 
     }
 }

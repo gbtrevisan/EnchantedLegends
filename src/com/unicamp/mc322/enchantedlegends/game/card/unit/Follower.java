@@ -99,6 +99,10 @@ public class Follower extends Card {
         defense.healHealth(amount);
     }
 
+    public void healFullHealth() {
+        defense.healFullHealth();
+    }
+
     public boolean isDead() {
         return defense.isDead();
     }
