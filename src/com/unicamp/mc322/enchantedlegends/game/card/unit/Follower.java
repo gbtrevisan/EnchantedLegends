@@ -120,10 +120,6 @@ public class Follower extends Card {
         return attack.getDamage();
     }
 
-    public int getHealth() {
-        return defense.getHealth();
-    }
-
     @Override
     public String toString() {
         return new StringJoiner(", ", Follower.class.getSimpleName() + "[", "]")

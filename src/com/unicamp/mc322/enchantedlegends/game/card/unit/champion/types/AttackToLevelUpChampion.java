@@ -1,11 +1,11 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types;
 
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
-import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
-import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitException;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.Champion;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.ChampionUpgrade;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.Trait;
+import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitException;
 
 import java.util.List;
 

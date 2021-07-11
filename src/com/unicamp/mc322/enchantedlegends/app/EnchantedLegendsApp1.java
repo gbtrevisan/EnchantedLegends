@@ -1,6 +1,6 @@
-package com.unicamp.mc322.enchantedlegends.game;
+package com.unicamp.mc322.enchantedlegends.app;
 
-public class EnchantedLegendsApp {
+public class EnchantedLegendsApp1 {
 
     public void start() {
         // menu

@@ -5,10 +5,12 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 
 public abstract class Player {
 
+    private final String name;
     private final Mana mana;
     private boolean onAttack;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
         mana = new Mana();
         onAttack = false;
     }
