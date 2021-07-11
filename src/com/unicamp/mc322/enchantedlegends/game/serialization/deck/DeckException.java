@@ -1,6 +1,6 @@
-package com.unicamp.mc322.enchantedlegends.game.loader.deck;
+package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
-import com.unicamp.mc322.enchantedlegends.game.loader.cards.GameCardsException;
+import com.unicamp.mc322.enchantedlegends.game.serialization.cards.GameCardsException;
 
 public class DeckException extends GameCardsException {
     public DeckException() {

@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.loader.deck;
+package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
 import com.unicamp.mc322.enchantedlegends.game.GameObject;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;

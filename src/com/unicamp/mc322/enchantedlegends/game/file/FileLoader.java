@@ -1,5 +1,6 @@
 package com.unicamp.mc322.enchantedlegends.game.file;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -16,6 +17,10 @@ public class FileLoader {
         }
 
         return instance;
+    }
+
+    public File loadFile(Class<?> clazz, String path) {
+        return new File(String.valueOf(clazz.getResource(path)));
     }
 
     public String loadFileAsString(Class<?> clazz, String path) {

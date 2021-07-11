@@ -1,8 +1,8 @@
-package com.unicamp.mc322.enchantedlegends.game.loader.cards;
+package com.unicamp.mc322.enchantedlegends.game.serialization.cards;
 
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.file.FileLoader;
-import com.unicamp.mc322.enchantedlegends.game.loader.JsonLoader;
+import com.unicamp.mc322.enchantedlegends.game.serialization.JsonLoader;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 

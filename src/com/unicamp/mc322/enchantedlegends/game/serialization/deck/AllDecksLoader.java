@@ -1,8 +1,8 @@
-package com.unicamp.mc322.enchantedlegends.game.loader.deck;
+package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
-import com.unicamp.mc322.enchantedlegends.game.loader.cards.AllCardsLoader;
+import com.unicamp.mc322.enchantedlegends.game.serialization.cards.AllCardsLoader;
 import com.unicamp.mc322.enchantedlegends.game.file.FileLoader;
-import com.unicamp.mc322.enchantedlegends.game.loader.JsonLoader;
+import com.unicamp.mc322.enchantedlegends.game.serialization.JsonLoader;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AllDecksLoader extends JsonLoader {
+    public static final String DECKS_JSON_FILENAME = "decks.json";
     private static AllDecksLoader instance;
 
     public static void main(String[] args) throws IOException, ParseException {
@@ -28,9 +29,8 @@ public class AllDecksLoader extends JsonLoader {
     }
 
     public void createAllDecks() throws ParseException, IOException {
-        List<Deck> decks = parseToObject(FileLoader.getInstance().loadFileAsString(getClass(), "decks.json"));
+        List<Deck> decks = parseToObject(FileLoader.getInstance().loadFileAsString(getClass(), DECKS_JSON_FILENAME));
         decks.forEach(deck -> Decks.getInstance().addDeck(deck));
-        decks.forEach(System.out::println);
     }
 
     @Override

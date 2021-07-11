@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.loader.deck;
+package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.loader.cards;
+package com.unicamp.mc322.enchantedlegends.game.serialization.cards;
 
 public class GameCardsException extends IllegalArgumentException {
     public GameCardsException() {

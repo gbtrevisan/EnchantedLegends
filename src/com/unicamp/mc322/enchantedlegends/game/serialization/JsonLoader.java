@@ -1,4 +1,4 @@
-package com.unicamp.mc322.enchantedlegends.game.loader;
+package com.unicamp.mc322.enchantedlegends.game.serialization;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -6,7 +6,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -106,13 +105,5 @@ public abstract class JsonLoader {
         }
 
         return jsonObject;
-    }
-
-    private static Object[] toVarArgs(List<Object> list) {
-        return list.toArray(new Object[0]);
-    }
-
-    private static Class<?>[] toClassVarArgs(List<Class<?>> list) {
-        return list.toArray(new Class<?>[0]);
     }
 }
