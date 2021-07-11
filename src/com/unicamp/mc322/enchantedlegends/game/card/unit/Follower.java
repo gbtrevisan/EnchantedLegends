@@ -17,9 +17,6 @@ public class Follower extends Card {
     protected Defense defense;
     private int initialHealth;
 
-    public Follower() {
-    }
-
     public Follower(String name, int cost, int damage, int health, Trait trait, Effect... effects) {
         super(name, cost, effects);
 

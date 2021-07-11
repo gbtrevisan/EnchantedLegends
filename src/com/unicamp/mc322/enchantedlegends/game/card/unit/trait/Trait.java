@@ -8,9 +8,6 @@ public abstract class Trait implements EventListener {
 
     private CardEvent event;
 
-    public Trait() {
-    }
-
     public Trait(CardEvent event) {
         if (event == null) {
             throw new TraitException("Trait event must not be null");
