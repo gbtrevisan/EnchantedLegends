@@ -1,6 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
 import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
 import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
 import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
 import com.unicamp.mc322.enchantedlegends.game.card.event.EventListener;
@@ -63,11 +64,20 @@ public abstract class Card implements GameObject {
         eventManager.subscribe(eventListener);
     }
 
+    public int getCost() {
+        return cost;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Card.class.getSimpleName() + "[", "]")
                 .add("name='" + name + "'")
                 .add("cost=" + cost)
                 .toString();
+    }
+
+    @Override
+    public void accept(GameObjectVisitor gameObjectVisitor) {
+
     }
 }

@@ -12,7 +12,7 @@ public class ImmediateCombatEffect extends Effect {
 
     @Override
     protected void apply() {
-        GameState.getInstance().getSelf().startImmediateCombat();
+        GameState.getInstance().getSelf().startImmediateCombat(GameState.getInstance().getEnemy());
     }
 
 }

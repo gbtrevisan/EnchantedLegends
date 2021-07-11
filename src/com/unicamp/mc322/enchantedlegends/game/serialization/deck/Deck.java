@@ -1,6 +1,7 @@
 package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
 import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 
 import java.util.*;
@@ -34,5 +35,10 @@ public class Deck implements GameObject {
                 .add("name='" + name + "'")
                 .add("cards=" + cards)
                 .toString();
+    }
+
+    @Override
+    public void accept(GameObjectVisitor visitor) {
+
     }
 }

@@ -6,10 +6,14 @@ import com.unicamp.mc322.enchantedlegends.game.card.unit.trait.exception.TraitEx
 
 public abstract class Trait implements EventListener {
 
-    private final CardEvent event;
+    private CardEvent event;
 
     public Trait() {
         this.event = CardEvent.ACTIVATE;
+    }
+
+    public Trait(CardEvent cardEvent) {
+        this.event = cardEvent;
     }
 
     @Override

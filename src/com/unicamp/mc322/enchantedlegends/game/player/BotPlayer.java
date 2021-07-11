@@ -1,5 +1,8 @@
 package com.unicamp.mc322.enchantedlegends.game.player;
 
+import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
+import com.unicamp.mc322.enchantedlegends.game.player.io.options.PlayerActions;
+
 public class BotPlayer extends Player {
 
     public BotPlayer(String name) {
@@ -7,12 +10,42 @@ public class BotPlayer extends Player {
     }
 
     @Override
-    public void chooseCard() {
+    public int chooseEvokeUnit() {
+        return 0;
+    }
+
+    @Override
+    public boolean insertUnitToCombat() {
+        return false;
+    }
+
+    @Override
+    public int chooseHandCard() {
+        return 0;
+    }
+
+    @Override
+    public int chooseEnemyCard(Player enemy) {
+        return 0;
+    }
+
+    @Override
+    public void changeInitialHand() {
 
     }
 
     @Override
-    public void chooseEnemyCard() {
+    public PlayerActions chooseAction() {
+        return null;
+    }
+
+    @Override
+    public void chooseDeck() {
+
+    }
+
+    @Override
+    public void discardUnit(int unitToDiscard, Follower follower) {
 
     }
 }

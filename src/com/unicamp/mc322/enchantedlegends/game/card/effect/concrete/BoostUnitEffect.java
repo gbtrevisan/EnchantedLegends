@@ -23,7 +23,7 @@ public class BoostUnitEffect extends Effect {
 
     @Override
     public void apply() {
-        GameState.getInstance().getSelf().boostAllUnits(damage, health);
+        GameState.getInstance().getSelf().boostUnit(damage, health);
     }
 
     public int getDamage() {
