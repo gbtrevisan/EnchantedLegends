@@ -1,6 +1,5 @@
 package com.unicamp.mc322.enchantedlegends.game.serialization.deck;
 
-import com.unicamp.mc322.enchantedlegends.game.serialization.cards.AllCardsLoader;
 import com.unicamp.mc322.enchantedlegends.game.file.FileLoader;
 import com.unicamp.mc322.enchantedlegends.game.serialization.JsonLoader;
 import org.json.simple.JSONArray;
@@ -14,11 +13,6 @@ import java.util.Map;
 public class AllDecksLoader extends JsonLoader {
     public static final String DECKS_JSON_FILENAME = "decks.json";
     private static AllDecksLoader instance;
-
-    public static void main(String[] args) throws IOException, ParseException {
-        AllCardsLoader.getInstance().createAllCards();
-        AllDecksLoader.getInstance().createAllDecks();
-    }
 
     public static AllDecksLoader getInstance() {
         if (instance == null) {
