@@ -1,10 +1,14 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
+import java.util.StringJoiner;
+
 public class Attack {
 
-    private final int damage;
+    private int damage;
     private int currentDamage;
 
+    public Attack() {
+    }
 
     Attack(int damage) {
         if (damage < 0) {
@@ -44,6 +48,9 @@ public class Attack {
 
     @Override
     public String toString() {
-        return "damage=" + currentDamage;
+        return new StringJoiner(", ", Attack.class.getSimpleName() + "[", "]")
+                .add("damage=" + damage)
+                .add("currentDamage=" + currentDamage)
+                .toString();
     }
 }

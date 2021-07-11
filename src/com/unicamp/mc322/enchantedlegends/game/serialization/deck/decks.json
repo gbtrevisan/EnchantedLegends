@@ -1,0 +1,43 @@
+{
+  "decks": [
+    {
+      "name": "Demacia",
+      "cards": [
+        "Garen",
+        "Vanguarda",
+        "Duelista",
+        "Defensor",
+        "Poro Defensor",
+        "Poro",
+        "Julgamento",
+        "Valor Redobrado",
+        "Golpe Certeiro",
+        "Combate Imediato"
+      ]
+    },
+    {
+      "name": "Noxus",
+      "cards": [
+        "Braum",
+        "Cithria de Campinuvem",
+        "Guardiã das Máscaras",
+        "Artíficie das Areias",
+        "Saltador de Pedras",
+        "Canhão de Poros",
+        "Destreza em Campo"
+      ]
+    },
+    {
+      "name": "Targon",
+      "cards": [
+        "Ezreal",
+        "Fugitivo",
+        "Elixit da Ira",
+        "Nasus",
+        "Ceifeiro Baccai",
+        "O Voo",
+        "Pix!"
+      ]
+    }
+  ]
+}
