@@ -1,0 +1,407 @@
+{
+  "cards": [
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types.AttackToLevelUpChampion",
+      "name": "Garen",
+      "cost": 5,
+      "attack": {
+        "damage": 5
+      },
+      "defense": {
+        "maxHealth": 5
+      },
+      "levelUpPoints": 2,
+      "effects": [],
+      "upgrades": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.MagicUpgrade",
+          "trait": {
+            "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.trait.concrete.ElusiveTrait"
+          }
+        },
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.DamageUpgrade",
+          "damagePoints": 1
+        },
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.HealthUpgrade",
+          "healthPoints": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Vanguarda",
+      "cost": 4,
+      "attack": {
+        "damage": 3
+      },
+      "defense": {
+        "maxHealth": 3
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostAllUnitsEffect",
+          "health": 1,
+          "damage": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Duelista",
+      "cost": 3,
+      "attack": {
+        "damage": 3
+      },
+      "defense": {
+        "maxHealth": 2
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.NewUnitCardEffect",
+          "card": "Poro"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Defensor",
+      "cost": 2,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 2
+      },
+      "effects": [],
+      "trait": {
+        "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.trait.concrete.FuryTrait",
+        "healthPoints": 0,
+        "damagePoints": 1
+      }
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Poro Defensor",
+      "cost": 1,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 1
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.NewCardEffect"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Poro",
+      "cost": 1,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 1
+      },
+      "effects": []
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Julgamento",
+      "cost": 8,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.AttackAllDefendersEffect"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Valor Redobrado",
+      "cost": 6,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.RestoreUnitHealthEffect"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Golpe Certeiro",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostUnitEffect",
+          "health": 1,
+          "damage": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Combate Imediato",
+      "cost": 2,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.ImmediateCombatEffect"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types.ReceiveDamageToLevelUpChampion",
+      "name": "Braum",
+      "cost": 4,
+      "attack": {
+        "damage": 0
+      },
+      "defense": {
+        "maxHealth": 5
+      },
+      "levelUpPoints": 10,
+      "effects": [],
+      "upgrades": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.DamageUpgrade",
+          "damagePoints": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types.AttackToLevelUpChampion",
+      "name": "Ezreal",
+      "cost": 3,
+      "attack": {
+        "damage": 1
+      },
+      "defense": {
+        "maxHealth": 3
+      },
+      "levelUpPoints": 6,
+      "effects": [],
+      "trait": {
+        "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.trait.concrete.ElusiveTrait"
+      },
+      "upgrades": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.HealthUpgrade",
+          "healthPoints": 4
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Cithria de Campinuvem",
+      "cost": 1,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 2
+      },
+      "effects": []
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Guardiã das Máscaras",
+      "cost": 2,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 3
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostAllUnitsEffect",
+          "health": 1,
+          "damage": 0
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Artíficie das Areias",
+      "cost": 4,
+      "attack": {
+        "damage": 3
+      },
+      "defense": {
+        "maxHealth": 5
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.NewCardEffect"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Saltador de Pedras",
+      "cost": 2,
+      "attack": {
+        "damage": 3
+      },
+      "defense": {
+        "maxHealth": 1
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.AttackNexusEffect",
+          "damage": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Canhão de Poros",
+      "cost": 0,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostAllUnitsEffect",
+          "health": 1,
+          "damage": 0
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Destreza em Campo",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostUnitEffect",
+          "health": 1,
+          "damage": 2
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Fugitivo",
+      "cost": 1,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.NewCardEffect"
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.Spell",
+      "name": "Elixit da Ira",
+      "cost": 2,
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.AttackNexusEffect",
+          "damage": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.types.AttackToLevelUpChampion",
+      "name": "Nasus",
+      "cost": 6,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 2
+      },
+      "levelUpPoints": 10,
+      "effects": [],
+      "upgrades": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.MagicUpgrade",
+          "trait": {
+            "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.trait.concrete.DoubleAttackTrait"
+          }
+        },
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.DamageUpgrade",
+          "damagePoints": 1
+        },
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.champion.upgrades.HealthUpgrade",
+          "healthPoints": 2
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Ceifeiro Baccai",
+      "cost": 1,
+      "damage": 1,
+      "health": 2,
+      "attack": {
+        "damage": 1
+      },
+      "defense": {
+        "maxHealth": 2
+      },
+      "effects": [],
+      "trait": {
+        "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.trait.concrete.FuryTrait",
+        "healthPoints": 1,
+        "damagePoints": 0
+      }
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "O Voo",
+      "cost": 1,
+      "damage": 2,
+      "health": 1,
+      "attack": {
+        "damage": 2
+      },
+      "defense": {
+        "maxHealth": 1
+      },
+      "effects": [],
+      "trait": {
+        "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.trait.concrete.ElusiveTrait"
+      }
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Pix!",
+      "cost": 1,
+      "damage": 0,
+      "health": 2,
+      "attack": {
+        "damage": 0
+      },
+      "defense": {
+        "maxHealth": 2
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostUnitEffect",
+          "health": 2,
+          "damage": 1
+        }
+      ]
+    },
+    {
+      "type": "com.unicamp.mc322.enchantedlegends.game.card.unit.Follower",
+      "name": "Sabotadora da Legião",
+      "cost": 2,
+      "attack": {
+        "damage": 1
+      },
+      "defense": {
+        "maxHealth": 3
+      },
+      "effects": [
+        {
+          "type": "com.unicamp.mc322.enchantedlegends.game.card.effect.concrete.BoostAllUnitsEffect",
+          "health": 2,
+          "damage": 1
+        }
+      ]
+    }
+  ]
+}

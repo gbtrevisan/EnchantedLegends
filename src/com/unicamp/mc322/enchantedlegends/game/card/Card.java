@@ -1,35 +1,73 @@
 package com.unicamp.mc322.enchantedlegends.game.card;
 
-import com.unicamp.mc322.enchantedlegends.game.event.Event;
-import com.unicamp.mc322.enchantedlegends.game.effect.Effect;
-import com.unicamp.mc322.enchantedlegends.game.gamestate.GameState;
+import com.unicamp.mc322.enchantedlegends.game.GameObject;
+import com.unicamp.mc322.enchantedlegends.game.card.effect.Effect;
+import com.unicamp.mc322.enchantedlegends.game.card.event.CardEvent;
+import com.unicamp.mc322.enchantedlegends.game.card.event.EventListener;
+import com.unicamp.mc322.enchantedlegends.game.card.event.EventManager;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
+import com.unicamp.mc322.enchantedlegends.game.card.mana.exception.InsufficientManaException;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
-public abstract class Card {
+public abstract class Card implements GameObject {
 
-    private String name;
-    protected final int cost;
-    protected final List<Effect> effects;
+    protected String name;
+    protected int cost;
+    private EventManager eventManager;
 
-    public Card(String name, int cost, Effect... effects) {
+    public Card() {
+    }
+
+    public Card(String name, int cost) {
+        this(name, cost, null);
+    }
+
+    public Card(String name, int cost, List<Effect> effects) {
         Objects.requireNonNull(name, "Card name must not be null");
 
+        this.name = name;
+
         if (cost < 0) {
-            throw new CardException("Card cost must not be negative");
+            throw new CardCreationException("Card cost must not be negative");
         }
 
         this.cost = cost;
-        this.effects = Arrays.asList(effects);
+        this.eventManager = new EventManager();
+
+        for (Effect effect : effects) {
+            eventManager.subscribe(effect);
+        }
     }
 
-    protected void applyEffects(GameState gameState, Event event) {
-        effects.stream().filter(effect -> effect.applicableOnEvent(event)).forEach(effect -> effect.apply(gameState));
+    public String getName() {
+        return name;
     }
 
-    public abstract boolean activate(Mana mana, GameState gameState);
+    protected void updateEventManager(CardEvent event) {
+        eventManager.update(event);
+    }
 
+    public void activate(Mana mana) {
+        try {
+            mana.use(cost);
+            updateEventManager(CardEvent.ACTIVATE);
+        } catch (InsufficientManaException e) {
+            throw new CardException("Not enough mana to activate this card!", e);
+        }
+    }
+
+    public void addEventListener(EventListener eventListener) {
+        eventManager.subscribe(eventListener);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Card.class.getSimpleName() + "[", "]")
+                .add("name='" + name + "'")
+                .add("cost=" + cost)
+                .toString();
+    }
 }
