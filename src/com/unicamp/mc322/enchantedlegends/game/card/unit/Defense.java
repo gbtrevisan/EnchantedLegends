@@ -1,10 +1,15 @@
 package com.unicamp.mc322.enchantedlegends.game.card.unit;
 
+import java.util.StringJoiner;
+
 public class Defense {
 
-    private final int maxHealth;
+    private int maxHealth;
     private int currentHealth;
     private boolean hasBarrier;
+
+    public Defense() {
+    }
 
     Defense(int maxHealth) {
         if (maxHealth <= 0) {
@@ -27,6 +32,10 @@ public class Defense {
         }
     }
 
+    int getHealth() {
+        return this.currentHealth;
+    }
+
     void healHealth(int amount) {
         currentHealth = Math.min(currentHealth + amount, maxHealth);
     }
@@ -41,6 +50,10 @@ public class Defense {
 
     @Override
     public String toString() {
-        return "maxHealth= " + maxHealth + "\n" + "currentHealth= " + currentHealth;
+        return new StringJoiner(", ", Defense.class.getSimpleName() + "[", "]")
+                .add("maxHealth=" + maxHealth)
+                .add("currentHealth=" + currentHealth)
+                .add("hasBarrier=" + hasBarrier)
+                .toString();
     }
 }

@@ -8,12 +8,8 @@ public abstract class Trait implements EventListener {
 
     private final CardEvent event;
 
-    public Trait(CardEvent event) {
-        if (event == null) {
-            throw new TraitException("Trait event must not be null");
-        }
-
-        this.event = event;
+    public Trait() {
+        this.event = CardEvent.ACTIVATE;
     }
 
     @Override
@@ -24,5 +20,4 @@ public abstract class Trait implements EventListener {
     }
 
     protected abstract void apply();
-
 }
