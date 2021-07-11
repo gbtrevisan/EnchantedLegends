@@ -6,8 +6,10 @@ import com.unicamp.mc322.enchantedlegends.game.player.io.options.PlayerActions;
 
 public class BotPlayer extends Player {
 
-    public BotPlayer(String name) {
-        super(name);
+    private static final String BOT_MAIN_NAME = "BOT";
+
+    public BotPlayer() {
+        super(BOT_MAIN_NAME);
     }
 
     @Override

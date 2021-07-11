@@ -6,9 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AllDecksLoader extends JsonLoader {
     public static final String DECKS_JSON_FILENAME = "decks.json";
@@ -22,9 +20,23 @@ public class AllDecksLoader extends JsonLoader {
         return instance;
     }
 
-    public void createAllDecks() throws ParseException, IOException {
-        List<Deck> decks = parseToObject(FileLoader.getInstance().loadFileAsString(getClass(), DECKS_JSON_FILENAME));
+    public void createAllDecksByDefault() {
+        List<Deck> decks = Arrays.asList(
+                new Deck("Demacia", Arrays.asList("Garen", "Vanguarda", "Duelista")),
+                new Deck("Noxus", Collections.emptyList()),
+                new Deck("Targon", Collections.emptyList())
+        );
+
         decks.forEach(deck -> Decks.getInstance().addDeck(deck));
+    }
+
+    public void createAllDecksFromJson() {
+        try {
+            List<Deck> decks = parseToObject(FileLoader.getInstance().loadFileAsString(getClass(), DECKS_JSON_FILENAME));
+            decks.forEach(deck -> Decks.getInstance().addDeck(deck));
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

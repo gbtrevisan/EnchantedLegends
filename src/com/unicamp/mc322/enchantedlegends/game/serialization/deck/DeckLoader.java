@@ -17,11 +17,11 @@ public class DeckLoader extends JsonLoader {
         String name = (String) deckJson.get("name");
         JSONArray cardsJson = (JSONArray) deckJson.get("cards");
 
-        List<Card> cards = new ArrayList<>();
+        List<String> cardNames = new ArrayList<>();
         for (Object o : cardsJson) {
-            cards.add(GameCards.getInstance().getByName((String) o));
+            cardNames.add((String) o);
         }
 
-        return new Deck(name, cards);
+        return new Deck(name, cardNames);
     }
 }

@@ -38,6 +38,10 @@ public abstract class Card implements GameObject {
         this.cost = cost;
         this.eventManager = new EventManager();
 
+        if (effects == null) {
+            return;
+        }
+
         for (Effect effect : effects) {
             eventManager.subscribe(effect);
         }

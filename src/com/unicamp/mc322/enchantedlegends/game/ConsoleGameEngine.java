@@ -13,8 +13,8 @@ public class ConsoleGameEngine implements GameEngine {
 
 
     public ConsoleGameEngine(Player player1, Player player2) {
-        Objects.requireNonNull(player1, "Player must not be null");
-        Objects.requireNonNull(player2, "Player must not be null");
+        Objects.requireNonNull(player1, "Player1 must not be null");
+        Objects.requireNonNull(player2, "Player2 must not be null");
 
         attacker = player1;
         defender = player2;
