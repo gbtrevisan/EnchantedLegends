@@ -2,11 +2,16 @@ package com.unicamp.mc322.enchantedlegends.game.player;
 
 import com.unicamp.mc322.enchantedlegends.game.GameObject;
 import com.unicamp.mc322.enchantedlegends.game.GameObjectVisitor;
+import com.unicamp.mc322.enchantedlegends.game.arena.Arena;
 import com.unicamp.mc322.enchantedlegends.game.card.Card;
 import com.unicamp.mc322.enchantedlegends.game.card.mana.Mana;
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 import com.unicamp.mc322.enchantedlegends.game.player.cards.PlayerCards;
+import com.unicamp.mc322.enchantedlegends.game.player.io.options.PlayerActions;
+import com.unicamp.mc322.enchantedlegends.game.queue.CombatQueue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Player implements GameObject {
@@ -28,13 +33,31 @@ public abstract class Player implements GameObject {
         this.onAttack = false;
     }
 
-    public abstract int chooseCard();
+    public abstract int chooseEvokeUnit();
 
-    public abstract int choosePositonToEvokeUnit();
+    public abstract boolean insertUnitToCombat();
 
     public abstract int chooseHandCard();
 
     public abstract int chooseEnemyCard(Player enemy);
+
+    public abstract void changeInitialHand();
+
+    public abstract PlayerActions chooseAction();
+
+    public void startTurn() {
+        PlayerActions playerAction = null;
+
+        while (playerTurnContinue(playerAction)) {
+            if (this.onAttack) {
+                playerAction = chooseAction();
+            } else {
+                playerAction = chooseAction();
+            }
+
+            definePlayerAction(playerAction);
+        }
+    }
 
     public abstract void chooseDeck();
 
@@ -50,10 +73,15 @@ public abstract class Player implements GameObject {
         this.playerCards.getInitialHand();
     }
 
-    public void evokeUnit(Follower follower) {
-        int positionToEvoke = choosePositonToEvokeUnit();
+    public abstract void discardUnit(int unitToDiscard, Follower follower);
 
-        this.playerCards.evokeUnit(positionToEvoke, follower);
+    public void evokeUnit(Follower follower) {
+        if (this.playerCards.isEvokedPositionFull()) {
+            int unitToDiscard = chooseEvokeUnit();
+            discardUnit(unitToDiscard, follower);
+        } else {
+            this.playerCards.evokeUnit(follower);
+        }
     }
 
     public void selectHandCard() {
@@ -123,13 +151,8 @@ public abstract class Player implements GameObject {
         return this.playerCards;
     }
 
-    private void improveUnitStatus(Follower unit, int damage, int health) {
-        unit.increaseDamage(damage);
-        unit.increaseHealth(health);
-    }
-
     private Follower getUnit() {
-        int selectedUnit = chooseCard();
+        int selectedUnit = chooseEvokeUnit();
 
         return this.playerCards.getSelectedEvokedUnit(selectedUnit);
     }
@@ -146,15 +169,11 @@ public abstract class Player implements GameObject {
 
     @Override
     public void accept(GameObjectVisitor gameObjectVisitor) {
-
+        gameObjectVisitor.visit(this);
     }
 
     public void restoreMana(int value) {
         mana.restore(value);
-    }
-
-    public void startTurn() {
-
     }
 
     public boolean chosenToAttack() {
@@ -162,7 +181,27 @@ public abstract class Player implements GameObject {
     }
 
     public void attack(Player enemy) {
-      
+        defineCombatCards();
+        defend(enemy, defineCombatCards());
+    }
+
+    protected void definePlayerAction(PlayerActions playerAction) {
+        if (playerAction == PlayerActions.CHOOSE_HAND_CARD) {
+            selectHandCard();
+        }
+    }
+
+    private Arena defineCombatCards() {
+        int numberOfCards = 0;
+        Arena arena = new Arena();
+
+        do {
+            int unitIndex = chooseEvokeUnit();
+            Follower unit = this.playerCards.getSelectedEvokedUnit(unitIndex);
+            arena.addAttacker(unit);
+        } while (numberOfCards != 0 && insertUnitToCombat());
+
+        return arena;
     }
 
     private void improveUnitStatus(Follower unit, int damage, int health) {
@@ -170,7 +209,16 @@ public abstract class Player implements GameObject {
         unit.increaseHealth(health);
     }
 
-    private void defend() {
+    private void defend(Player enemy, Arena combatArena) {
+        while (insertUnitToCombat()) {
+            int unitIndex = enemy.chooseEvokeUnit();
+            Follower unit = enemy.playerCards.getSelectedEvokedUnit(unitIndex);
+            combatArena.addDefender(unit);
+        }
+    }
 
+    private boolean playerTurnContinue(PlayerActions playerAction) {
+        return playerAction != PlayerActions.ATTACK && playerAction != PlayerActions.PASS_TURN &&
+                playerAction != PlayerActions.FINISH_WITHOUT_ATTACK;
     }
 }

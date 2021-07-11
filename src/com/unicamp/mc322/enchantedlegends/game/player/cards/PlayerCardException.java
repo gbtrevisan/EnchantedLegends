@@ -18,5 +18,4 @@ public class PlayerCardException extends GameCardException {
     public PlayerCardException(Throwable cause) {
         super(cause);
     }
-
 }

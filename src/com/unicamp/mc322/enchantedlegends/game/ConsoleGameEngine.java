@@ -27,6 +27,9 @@ public class ConsoleGameEngine implements GameEngine {
         attacker.receiveInitialHand();
         defender.receiveInitialHand();
 
+        attacker.changeInitialHand();
+        defender.changeInitialHand();
+
         do {
             newRound();
             Player aux = attacker;

@@ -16,8 +16,8 @@ import java.util.StringJoiner;
 public abstract class Card implements GameObject {
 
     protected int cost;
-    private final String name;
-    private final EventManager eventManager;
+    private String name;
+    private EventManager eventManager;
 
     public Card(String name, int cost, Effect... effects) {
         Objects.requireNonNull(name, "Card name must not be null");
@@ -34,6 +34,10 @@ public abstract class Card implements GameObject {
         for (Effect effect : effects) {
             eventManager.subscribe(effect);
         }
+    }
+
+
+    public Card() {
     }
 
     public String getName() {
@@ -55,6 +59,10 @@ public abstract class Card implements GameObject {
 
     public void addEventListener(EventListener eventListener) {
         eventManager.subscribe(eventListener);
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     @Override

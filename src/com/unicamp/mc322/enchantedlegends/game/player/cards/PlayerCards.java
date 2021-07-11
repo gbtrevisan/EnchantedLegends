@@ -12,11 +12,11 @@ import java.util.Random;
 
 public class PlayerCards implements GameObject {
 
-    protected final List<Card> playerUnseenCards;
-    protected final List<Card> playerHand;
-    protected final EvokedUnits evokedUnits;
-    protected final List<Card> deadUnits;
-    protected final static int INITIAL_HAND = 4;
+    private final List<Card> playerUnseenCards;
+    private final List<Card> playerHand;
+    private final EvokedUnits evokedUnits;
+    private final List<Card> deadUnits;
+    private final static int INITIAL_HAND = 4;
 
     public PlayerCards() {
         this.evokedUnits = new EvokedUnits();
@@ -43,10 +43,6 @@ public class PlayerCards implements GameObject {
     }
 
     public void changeInitialHand(List<Integer> cardsToChange) {
-        if (cardsToChange.size() > this.playerHand.size()) {
-            throw new PlayerCardException("You can only trade from 0 to " + this.playerHand.size() + " cards");
-        }
-
         List<Card> removedHandCards = new ArrayList<>(), newHandCards = new ArrayList<>();
 
         for (int i = 0; i < cardsToChange.size() && !this.playerUnseenCards.isEmpty(); i++) {
@@ -54,17 +50,29 @@ public class PlayerCards implements GameObject {
             Card newCard = this.playerUnseenCards.get(randomIndex(this.playerUnseenCards.size()));
             newHandCards.add(newCard);
 
-            this.playerHand.remove(cardsToChange.get(i));
             this.playerUnseenCards.remove(newCard);
             checkCardsSituation();
         }
 
+        this.playerHand.removeAll(removedHandCards);
         this.playerHand.addAll(newHandCards);
         this.playerUnseenCards.addAll(removedHandCards);
     }
 
-    public void evokeUnit(int indexToEvokeUnit, Follower followerEvoked) {
-        this.evokedUnits.evokeNewUnitAt(indexToEvokeUnit, followerEvoked);
+    public Follower replaceEvokedUnit(int unitIndex, Follower handUnit) {
+        if (isIndexInvalid(unitIndex, this.evokedUnits.getNumberOfEvokedUnits())) {
+            throw new PlayerCardException("The desired index " + unitIndex + " is invalid");
+        }
+
+        Follower removedUnit = this.evokedUnits.removeUnit(unitIndex);
+        this.playerHand.add(removedUnit);
+        this.evokedUnits.evokeNewUnit(handUnit);
+
+        return removedUnit;
+    }
+
+    public void evokeUnit(Follower followerEvoked) {
+        this.evokedUnits.evokeNewUnit(followerEvoked);
     }
 
     public void gainDeckCard(String cardName) {
@@ -80,15 +88,15 @@ public class PlayerCards implements GameObject {
     }
 
     public Follower getSelectedEvokedUnit(int cardIndex) {
+        if (isIndexInvalid(cardIndex, this.evokedUnits.getNumberOfEvokedUnits())) {
+            throw new PlayerCardException("The desired index " + cardIndex + " is invalid");
+        }
+
         return this.evokedUnits.getSelectedEvokedUnit(cardIndex);
     }
 
     public int getHandSize() {
         return this.playerHand.size();
-    }
-
-    public int getRandomEvokePosition() {
-        return randomIndex(this.evokedUnits.sizeOfEvokeArea());
     }
 
     public int randomIndex(int listSize) {
@@ -99,6 +107,10 @@ public class PlayerCards implements GameObject {
 
     public int getNumberOfEvokedUnits() {
         return this.evokedUnits.getNumberOfEvokedUnits();
+    }
+
+    public boolean isEvokedPositionFull() {
+        return this.evokedUnits.isEvokedPositionFull();
     }
 
     private boolean isIndexInvalid(int index, int maxValue) {

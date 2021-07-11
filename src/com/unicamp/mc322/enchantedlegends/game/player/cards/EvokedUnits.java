@@ -2,52 +2,51 @@ package com.unicamp.mc322.enchantedlegends.game.player.cards;
 
 import com.unicamp.mc322.enchantedlegends.game.card.unit.Follower;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EvokedUnits {
 
-    private Follower[] evokedUnitsArea;
+    private List<Follower> evokedUnitsArea;
     private final static int MAX_EVOKED_UNITS = 6;
 
     EvokedUnits() {
-        this.evokedUnitsArea = new Follower[MAX_EVOKED_UNITS];
+        this.evokedUnitsArea = new ArrayList<>();
     }
 
     Follower getSelectedEvokedUnit(int cardIndex) {
-        if (isIndexInvalid(cardIndex) && this.evokedUnitsArea[cardIndex - 1] == null) {
+        if (isIndexInvalid(cardIndex) && this.evokedUnitsArea.get(cardIndex - 1) == null) {
             throw new PlayerCardException("The desired index " + cardIndex + " is invalid");
         }
 
-        return this.evokedUnitsArea[cardIndex];
+        return this.evokedUnitsArea.get(cardIndex - 1);
     }
 
-    void evokeNewUnitAt(int index, Follower unit) {
-        if (isIndexInvalid(index) || this.evokedUnitsArea[index - 1] != null) {
-            throw new PlayerCardException("Select a valid position to evoke your unit");
+    void evokeNewUnit(Follower unit) {
+        if (this.evokedUnitsArea.size() == MAX_EVOKED_UNITS) {
+            throw new PlayerCardException("You can only envoke " +  MAX_EVOKED_UNITS + " units");
         }
 
-        this.evokedUnitsArea[index - 1] = unit;
+        this.evokedUnitsArea.add(unit);
+    }
+
+    Follower removeUnit(int unitIndex) {
+        Follower removedFollower = this.evokedUnitsArea.get(unitIndex);
+        this.evokedUnitsArea.remove(unitIndex);
+
+        return removedFollower;
     }
 
     List<Follower> getEvokedUnits() {
-        return Arrays.asList(this.evokedUnitsArea);
+        return this.evokedUnitsArea;
     }
 
     int getNumberOfEvokedUnits() {
-        int count = 0;
-
-        for (int i = 0; i < MAX_EVOKED_UNITS; i++) {
-            if (this.evokedUnitsArea[i] != null) {
-                count++;
-            }
-        }
-
-        return count;
+        return this.evokedUnitsArea.size();
     }
 
-    int sizeOfEvokeArea() {
-        return MAX_EVOKED_UNITS;
+    boolean isEvokedPositionFull() {
+        return this.evokedUnitsArea.size() == MAX_EVOKED_UNITS;
     }
 
     private boolean isIndexInvalid(int index) {
